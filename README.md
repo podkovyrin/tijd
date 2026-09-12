@@ -20,6 +20,6 @@ Edit a widget from **My widgets**, or use your launcher’s widget settings wher
 - `WidgetConfigurationActivity` owns the unsaved draft; `WidgetPreview` uses the same renderer as the host. `MainActivity` lists installed widgets.
 - `ClockUpdates` serializes publications and includes the style in its layout identity, so editing triggers a complete update and later minute ticks preserve the style.
 
-Run `./gradlew testDebugUnitTest lintDebug` for local checks and `./gradlew connectedDebugAndroidTest` with an emulator for native rendering, configuration, and widget lifecycle checks.
+Run `./android/gradlew -p android testDebugUnitTest lintDebug` for local checks and `./android/gradlew -p android connectedDebugAndroidTest` with an emulator for native rendering, configuration, and widget lifecycle checks.
 
 [MIT license](LICENSE).

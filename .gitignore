@@ -1,4 +1,4 @@
-# Local tools and generated files
+# Android local tools and generated files
 .gradle/
 .kotlin/
 .idea/
