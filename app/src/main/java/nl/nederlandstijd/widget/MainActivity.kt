@@ -10,10 +10,8 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
-import android.view.WindowInsets
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
@@ -22,24 +20,17 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-/** Only the setup needed to grant minute updates and add the widget. */
+/** Setup and an inventory of installed widget instances; editing lives in its own activity. */
 class MainActivity : Activity() {
+    private lateinit var widgetList: LinearLayout
     private lateinit var permissionStatus: TextView
     private lateinit var permissionButton: Button
     private val activityScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val spacing = (16 * resources.displayMetrics.density).toInt()
-        val content = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(spacing, spacing, spacing, spacing)
-        }
-        fun label(resource: Int) = TextView(this).apply {
-            setText(resource)
-            setPadding(0, 0, 0, spacing)
-            content.addView(this)
-        }
+        val content = settingsContent()
+        fun label(resource: Int) = content.label(getString(resource))
         label(R.string.app_name).setTextAppearance(android.R.style.TextAppearance_Material_Headline)
         label(R.string.setup_description)
         label(R.string.permission_description)
@@ -59,15 +50,11 @@ class MainActivity : Activity() {
             setOnClickListener { addWidget(DutchTimeRowWidgetReceiver::class.java) }
             content.addView(this)
         }
-        val scroll = ScrollView(this).apply { addView(content) }
-        scroll.setOnApplyWindowInsetsListener { view, insets ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                val bars = insets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.displayCutout())
-                view.setPadding(bars.left, bars.top, bars.right, bars.bottom)
-            }
-            insets
-        }
-        setContentView(scroll)
+        label(R.string.lock_screen_note)
+        content.label(getString(R.string.my_widgets), heading = true)
+        widgetList = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        content.addView(widgetList)
+
     }
 
     override fun onResume() {
@@ -75,6 +62,7 @@ class MainActivity : Activity() {
         val allowed = MinuteScheduler.canSchedule(this)
         permissionStatus.setText(if (allowed) R.string.permission_granted else R.string.permission_missing)
         permissionButton.visibility = if (allowed) View.GONE else View.VISIBLE
+        showWidgets()
         MinuteScheduler.scheduleNext(this)
         activityScope.launch { MinuteScheduler.refresh(this@MainActivity) }
     }
@@ -82,6 +70,30 @@ class MainActivity : Activity() {
     override fun onDestroy() {
         activityScope.cancel()
         super.onDestroy()
+    }
+
+    private fun showWidgets() {
+        widgetList.removeAllViews()
+        val ids = MinuteScheduler.widgetIds(this).sorted()
+        val manager = AppWidgetManager.getInstance(this)
+        if (ids.isEmpty()) widgetList.label(getString(R.string.my_widgets_empty))
+        for (id in ids) {
+            val info = manager.getAppWidgetInfo(id) ?: continue
+            val row = info.provider == ComponentName(this, DutchTimeRowWidgetReceiver::class.java)
+            val type = getString(if (row) R.string.single_row_widget else R.string.compact_widget)
+            widgetList.label(getString(R.string.widget_card, type, id))
+            val preview = WidgetPreview(this, activityScope)
+            widgetList.addView(preview, LinearLayout.LayoutParams(-1, dp(140)))
+            preview.show(WidgetStyleStore(this).read(id), manager.getAppWidgetOptions(id), row)
+            widgetList.addView(Button(this).apply {
+                setText(R.string.edit_style)
+                contentDescription = getString(R.string.edit_widget_title, id)
+                setOnClickListener {
+                    startActivity(Intent(this@MainActivity, WidgetConfigurationActivity::class.java)
+                        .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id))
+                }
+            })
+        }
     }
 
     private fun requestMinutePermission() {

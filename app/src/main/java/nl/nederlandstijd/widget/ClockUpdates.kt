@@ -27,6 +27,7 @@ internal object ClockUpdates {
         val ink: ClockInk,
         val singleLine: Boolean,
         val configuration: Configuration,
+        val style: WidgetStyle,
     )
     private val published = mutableMapOf<Int, LayoutKey>()
 
@@ -87,19 +88,20 @@ internal object ClockUpdates {
             WallpaperAppearance.resolve(context, options),
             info.provider == ComponentName(context, DutchTimeRowWidgetReceiver::class.java),
             configuration,
+            WidgetStyleStore(context).read(id),
         )
         val coroutine = currentCoroutineContext()
-        ClockViews.prepare(renderContext, key.geometry, key.ink, key.singleLine) { coroutine.ensureActive() }
+        ClockViews.prepare(renderContext, key.geometry, key.ink, key.singleLine, key.style) { coroutine.ensureActive() }
         // The framework does not merge size/orientation RemoteViews trees in partial updates.
         // Send those trees in full, with cached metrics, so rotation never revives old text.
         val partial = !forceFull && published[id] == key && key.geometry.sizes.size == 1
         var text = ClockViews.currentText()
-        var views = ClockViews.forGeometry(renderContext, key.geometry, text, key.ink, key.singleLine, partial)
+        var views = ClockViews.forGeometry(renderContext, key.geometry, text, key.ink, key.singleLine, partial, key.style)
         // Even a fast render can straddle a minute boundary. Re-sample after preparation.
         val latest = ClockViews.currentText()
         if (latest != text) {
             text = latest
-            views = ClockViews.forGeometry(renderContext, key.geometry, text, key.ink, key.singleLine, partial)
+            views = ClockViews.forGeometry(renderContext, key.geometry, text, key.ink, key.singleLine, partial, key.style)
         }
         coroutine.ensureActive()
         if (partial) manager.partiallyUpdateAppWidget(id, views) else manager.updateAppWidget(id, views)

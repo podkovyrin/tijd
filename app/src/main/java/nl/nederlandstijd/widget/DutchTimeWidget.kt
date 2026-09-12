@@ -8,6 +8,7 @@ import android.os.Bundle
 /** Every lifecycle event uses the same publisher as the minute alarm. */
 open class DutchTimeWidgetReceiver : AppWidgetProvider() {
     override fun onUpdate(context: Context, manager: AppWidgetManager, appWidgetIds: IntArray) {
+        WidgetStyleStore(context).ensureInitialized(appWidgetIds)
         ClockUpdates.receive(this, context, forceFull = true)
     }
 
@@ -24,7 +25,11 @@ open class DutchTimeWidgetReceiver : AppWidgetProvider() {
     }
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
+        WidgetStyleStore(context).delete(appWidgetIds)
         MinuteScheduler.scheduleNext(context)
+    }
+    override fun onRestored(context: Context, oldWidgetIds: IntArray, newWidgetIds: IntArray) {
+        WidgetStyleStore(context).remap(oldWidgetIds, newWidgetIds)
     }
 }
 

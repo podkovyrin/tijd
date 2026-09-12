@@ -23,6 +23,7 @@ internal object StableClockText {
         val heightPx: Int,
         val layoutId: Int,
         val singleLine: Boolean,
+        val sizePercent: Int,
         val configuration: Configuration,
     )
 
@@ -35,12 +36,12 @@ internal object StableClockText {
     private val words by lazy { phrases.flatMap { it.split(' ') }.distinct().sortedByDescending { it.length } }
 
     @SuppressLint("ApplySharedPref") // Rare cache writes finish on IO before the broadcast completes.
-    fun fit(context: Context, text: String, widthDp: Float, heightDp: Float, layoutId: Int, singleLine: Boolean, checkActive: () -> Unit = {}): TextFit {
+    fun fit(context: Context, text: String, widthDp: Float, heightDp: Float, layoutId: Int, singleLine: Boolean, sizePercent: Int = 100, checkActive: () -> Unit = {}): TextFit {
         val metrics = context.resources.displayMetrics
         val key = CacheKey(
             (widthDp * metrics.density).toInt().coerceAtLeast(1),
             (heightDp * metrics.density).toInt().coerceAtLeast(1),
-            layoutId, singleLine, Configuration(context.resources.configuration),
+            layoutId, singleLine, sizePercent.coerceIn(50, 100), Configuration(context.resources.configuration),
         )
         // Measure the same native view used by the host, including the device's typeface.
         val view = LayoutInflater.from(context).inflate(layoutId, FrameLayout(context), false) as TextView
@@ -79,7 +80,7 @@ internal object StableClockText {
         val weight = if (Build.VERSION.SDK_INT >= 31) fontWeightAdjustment else 0
         // Use resource-affecting values, not Configuration.toString's transient sequence numbers.
         listOf(BuildConfig.VERSION_CODE, Build.FINGERPRINT, key.widthPx, key.heightPx, key.layoutId,
-            key.singleLine, fontScale, densityDpi, uiMode, screenLayout, orientation, screenWidthDp,
+            key.singleLine, key.sizePercent, fontScale, densityDpi, uiMode, screenLayout, orientation, screenWidthDp,
             screenHeightDp, smallestScreenWidthDp, weight, languages, mcc, mnc, touchscreen,
             keyboard, keyboardHidden, hardKeyboardHidden, navigation, navigationHidden).joinToString("|")
     }
@@ -129,6 +130,7 @@ internal object StableClockText {
         val breathingRoom = context.resources.getDimension(R.dimen.widget_text_margin)
         var result = if (largestFit < preferredMinimum) largestFit
         else (largestFit - breathingRoom).coerceAtLeast(preferredMinimum)
+        result *= key.sizePercent / 100f
         // Fractional sizes can rewrap differently. Check all phrases after the 2sp margin,
         // so a later minute never needs its own, smaller font size.
         while (result > 0f && !fitsEveryPhrase(result)) result = (result - 1f).coerceAtLeast(0f)

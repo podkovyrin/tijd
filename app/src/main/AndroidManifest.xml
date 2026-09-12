@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".WidgetConfigurationActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ClockLaunchActivity" android:exported="false"
             android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" />
         <receiver android:name=".DutchTimeWidgetReceiver" android:exported="false">
