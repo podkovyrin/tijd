@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#MISE description="Validate repository tooling configuration and shell tasks"
+set -euo pipefail
+
+ROOT_DIR="$(git rev-parse --show-toplevel)"
+
+mise config --no-header >/dev/null
+find "$ROOT_DIR/.mise/tasks" -type f -print0 | xargs -0 shellcheck
+shfmt -d -i 4 "$ROOT_DIR/.mise/tasks"

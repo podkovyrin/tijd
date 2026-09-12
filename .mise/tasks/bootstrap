@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#MISE description="Prepare the C++ and Android build environments"
+set -euo pipefail
+
+ROOT_DIR="$(git rev-parse --show-toplevel)"
+
+(cd "$ROOT_DIR/cpp-spoken-time" && cmake --preset dev)
+"$ROOT_DIR/android/gradlew" -p "$ROOT_DIR/android" --version >/dev/null
+
+echo "Bootstrap complete. Run checks with: mise run check"

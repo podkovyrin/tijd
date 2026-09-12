@@ -1,0 +1,20 @@
+# This file is the repository's tooling control plane. Versions are exact;
+# mise.lock records the resolved artifacts for reproducible installation.
+
+min_version = "2026.9.1"
+
+[tools]
+cmake = "4.4.3"
+ninja = "1.13.2"
+clang-format = "23.1.1"
+java = "zulu-17.68.203.0"
+shellcheck = "0.11.0"
+shfmt = "3.14.0"
+
+[env]
+ANDROID_HOME = '{% if os() == "macos" %}{{ get_env(name="ANDROID_HOME", default=env.HOME ~ "/Library/Android/sdk") }}{% else %}{{ get_env(name="ANDROID_HOME", default=env.HOME ~ "/Android/Sdk") }}{% endif %}'
+_.path = [
+  "{{ env.ANDROID_HOME }}/platform-tools",
+  "{{ env.ANDROID_HOME }}/emulator",
+  "{{ env.ANDROID_HOME }}/cmdline-tools/latest/bin",
+]

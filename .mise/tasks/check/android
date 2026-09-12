@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#MISE description="Run Android unit tests and lint"
+set -euo pipefail
+
+ROOT_DIR="$(git rev-parse --show-toplevel)"
+"$ROOT_DIR/android/gradlew" -p "$ROOT_DIR/android" testDebugUnitTest lintDebug

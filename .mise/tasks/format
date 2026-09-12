@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#MISE description="Format C++ sources and Mise shell tasks"
+set -euo pipefail
+
+ROOT_DIR="$(git rev-parse --show-toplevel)"
+CPP_DIR="$ROOT_DIR/cpp-spoken-time"
+
+find "$CPP_DIR/include" "$CPP_DIR/src" "$CPP_DIR/tests" \
+    -type f \( -name '*.cpp' -o -name '*.hpp' \) -print0 |
+    xargs -0 clang-format -i
+shfmt -w -i 4 "$ROOT_DIR/.mise/tasks"

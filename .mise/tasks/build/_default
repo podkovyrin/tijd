@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#MISE description="Build all repository deliverables"
+#MISE depends=["build:cpp", "build:android"]
+set -euo pipefail
+
+echo "All repository deliverables built."

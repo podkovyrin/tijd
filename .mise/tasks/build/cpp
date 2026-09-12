@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#MISE description="Build the host C++ library"
+set -euo pipefail
+
+ROOT_DIR="$(git rev-parse --show-toplevel)"
+CPP_DIR="$ROOT_DIR/cpp-spoken-time"
+
+cd "$CPP_DIR"
+cmake --preset dev
+cmake --build --preset dev --parallel

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#MISE description="Run all repository checks"
+#MISE depends=["check:tooling", "check:cpp", "check:android"]
+set -euo pipefail
+
+echo "Repository checks passed."

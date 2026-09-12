@@ -22,3 +22,12 @@ signing.properties
 .env
 .env.*
 !.env.example
+
+# Developer-local tool configuration
+mise.local.toml
+.mise.local.toml
+CMakeUserPresets.json
+
+# Mise task namespaces are source, even when named after ignored output folders.
+!/.mise/tasks/build/
+!/.mise/tasks/build/**
