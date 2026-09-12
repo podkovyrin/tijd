@@ -1,0 +1,40 @@
+<resources>
+    <dimen name="widget_text_size">16sp</dimen>
+    <dimen name="widget_text_margin">2sp</dimen>
+    <dimen name="widget_padding">16dp</dimen>
+
+    <style name="ClockText">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:padding">@dimen/widget_padding</item>
+        <item name="android:gravity">top|start</item>
+        <item name="android:layoutDirection">ltr</item>
+        <item name="android:textDirection">ltr</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">@dimen/widget_text_size</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:shadowColor">#80000000</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:breakStrategy">simple</item>
+        <item name="android:hyphenationFrequency">none</item>
+    </style>
+    <style name="ClockText.DarkInk" parent="ClockText">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:shadowColor">#80ffffff</item>
+    </style>
+    <style name="ClockText.Rounded" parent="ClockText">
+        <item name="android:fontFamily">variable-body-large-emphasized</item>
+    </style>
+    <style name="ClockText.RoundedDark" parent="ClockText.DarkInk">
+        <item name="android:fontFamily">variable-body-large-emphasized</item>
+    </style>
+    <style name="ClockText.Google" parent="ClockText">
+        <item name="android:fontFamily">google-sans-medium</item>
+    </style>
+    <style name="ClockText.GoogleDark" parent="ClockText.DarkInk">
+        <item name="android:fontFamily">google-sans-medium</item>
+    </style>
+</resources>

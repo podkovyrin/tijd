@@ -1,0 +1,24 @@
+# Local tools and generated files
+.gradle/
+.kotlin/
+.idea/
+**/build/
+local.properties
+*.iml
+.DS_Store
+captures/
+*.hprof
+
+# Build artifacts and private signing material
+*.apk
+*.aab
+*.apks
+*.jks
+*.keystore
+*.p12
+*.pfx
+keystore.properties
+signing.properties
+.env
+.env.*
+!.env.example
