@@ -95,10 +95,10 @@ internal object ClockUpdates {
         // The framework does not merge size/orientation RemoteViews trees in partial updates.
         // Send those trees in full, with cached metrics, so rotation never revives old text.
         val partial = !forceFull && published[id] == key && key.geometry.sizes.size == 1
-        var text = ClockViews.currentText()
+        var text = ClockViews.currentText(key.style.languageCode)
         var views = ClockViews.forGeometry(renderContext, key.geometry, text, key.ink, key.singleLine, partial, key.style)
         // Even a fast render can straddle a minute boundary. Re-sample after preparation.
-        val latest = ClockViews.currentText()
+        val latest = ClockViews.currentText(key.style.languageCode)
         if (latest != text) {
             text = latest
             views = ClockViews.forGeometry(renderContext, key.geometry, text, key.ink, key.singleLine, partial, key.style)

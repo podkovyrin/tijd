@@ -1,9 +1,9 @@
 # Spoken Time
 
-A cross-platform project for showing the time in spoken words. The current Android widget
-renders Dutch phrases such as **vijf voor half negen**; a shared C++ library is being prepared
-for additional platforms and languages.
+A cross-platform project for showing the time in spoken words. The Android widget uses
+the shared C++20 library through JNI, with 91 language, script, and regional choices.
 
+- Each widget saves its own language, initially selected from the current device locale. Unsupported locales fall back to English. Saved defaults can override the initial selection for future widgets.
 - Independent styles for every widget: 40 curated colors, available system fonts, text size and alignment, and optional translucent panels.
 - Transparent background and wallpaper-aware text color by default. Rounded panels require Android 12 or newer.
 - Compact and single-row layouts, with automatic sizing and whole-word wrapping.
@@ -18,7 +18,7 @@ Edit a widget from **My widgets**, or use your launcher’s widget settings wher
 ## Implementation
 
 - `cpp-spoken-time` is the platform-neutral C++20 library with 91 language, script, and regional entries.
-- `android` contains the existing Android widget.
+- `android` contains the Android widget and its CMake/JNI bridge to `cpp-spoken-time`.
 - `WidgetStyle`, `StyleCatalog`, and `WidgetStyleStore` define validated settings, the curated palette, and atomic per-widget storage. Defaults are copied when a widget is created.
 - `ClockFont`, `StableClockText`, and `ClockViews` render native text and fit every possible time phrase. Font-specific XML layouts keep host rendering and measurement identical without rasterizing text.
 - `WidgetConfigurationActivity` owns the unsaved draft; `WidgetPreview` uses the same renderer as the host. `MainActivity` lists installed widgets.
@@ -34,6 +34,8 @@ mise install
 mise run bootstrap
 mise run check
 ```
+
+Android native builds use NDK `28.1.13356709` and SDK CMake `4.1.2`, installed automatically by Gradle when SDK licenses are accepted.
 
 Use `mise run build` to build both host C++ and Android debug artifacts, or run the scoped
 `build:cpp`, `build:android`, `check:cpp`, and `check:android` tasks. Run

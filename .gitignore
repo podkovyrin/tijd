@@ -1,5 +1,6 @@
 # Android local tools and generated files
 .gradle/
+.cxx/
 .kotlin/
 .idea/
 **/build/

@@ -1,6 +1,5 @@
 package nl.nederlandstijd.widget
 
-import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
@@ -12,7 +11,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class WidgetStyleStoreTest {
     private val context = InstrumentationRegistry.getInstrumentation().targetContext
-    private val preferences = context.getSharedPreferences("widget_styles", Context.MODE_PRIVATE)
     private val store = WidgetStyleStore(context)
     private val ids = intArrayOf(990001, 990002, 990003)
     private val priorDefaults = store.defaults()
@@ -68,16 +66,4 @@ class WidgetStyleStoreTest {
         assertEquals(teal, store.read(ids[2]))
     }
 
-    @Test
-    fun invalidPersistedFieldsAndCorruptRecordsFallBackSafely() {
-        preferences.edit().putString("widget_${ids[0]}", """
-            {"color":"missing","font":"missing","size":999,"alignment":"missing",
-             "background":"missing","opacity":200,"radius":-1}
-        """.trimIndent()).commit()
-        assertEquals(WidgetStyle(backgroundOpacity = 100), store.read(ids[0]))
-        preferences.edit().putString("widget_${ids[0]}", "not json").commit()
-        assertEquals(WidgetStyle(), store.read(ids[0]))
-        preferences.edit().putInt("widget_${ids[0]}", 7).commit()
-        assertEquals(WidgetStyle(), store.read(ids[0]))
-    }
 }

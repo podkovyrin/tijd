@@ -40,19 +40,24 @@ class WidgetConfigurationActivity : Activity() {
         val manager = AppWidgetManager.getInstance(this)
         singleLine = manager.getAppWidgetInfo(widgetId).provider == ComponentName(this, DutchTimeRowWidgetReceiver::class.java)
         options = manager.getAppWidgetOptions(widgetId)
+        if (savedInstanceState != null) {
+            require(listOf("color", "font", "size", "alignment", "background", "opacity", "radius", "language",
+                "sample", "lightPreview", "useAsDefault").all(savedInstanceState::containsKey))
+        }
         val store = WidgetStyleStore(this)
         draft = if (savedInstanceState == null) {
             if (store.contains(widgetId)) store.read(widgetId) else store.defaults()
         } else WidgetStyle(
-            savedInstanceState.getString("color") ?: "automatic",
-            savedInstanceState.getString("font") ?: "automatic",
-            savedInstanceState.getInt("size", 100),
-            WidgetAlignment.entries.firstOrNull { it.name == savedInstanceState.getString("alignment") } ?: WidgetAlignment.AUTO,
-            savedInstanceState.getString("background") ?: "transparent",
-            savedInstanceState.getInt("opacity", 60),
-            savedInstanceState.getInt("radius", 16),
-        ).sanitized()
-        sample = savedInstanceState?.getString("sample") ?: "current"
+            requireNotNull(savedInstanceState.getString("color")),
+            requireNotNull(savedInstanceState.getString("font")),
+            savedInstanceState.getInt("size"),
+            WidgetAlignment.valueOf(requireNotNull(savedInstanceState.getString("alignment"))),
+            requireNotNull(savedInstanceState.getString("background")),
+            savedInstanceState.getInt("opacity"),
+            savedInstanceState.getInt("radius"),
+            requireNotNull(savedInstanceState.getString("language")),
+        )
+        sample = if (savedInstanceState == null) "current" else requireNotNull(savedInstanceState.getString("sample"))
         lightPreview = savedInstanceState?.getBoolean("lightPreview") ?: false
 
         val header = LinearLayout(this).apply {
@@ -69,8 +74,8 @@ class WidgetConfigurationActivity : Activity() {
         content.label(getString(R.string.edit_widget_description))
         content.choice(getString(R.string.preview_phrase), listOf(
             StyleOption("current", getString(R.string.current_time)),
-            StyleOption("short", "negen uur"),
-            StyleOption("long", "negentien over twaalf"),
+            StyleOption("short", getString(R.string.sample_short)),
+            StyleOption("long", getString(R.string.sample_long)),
         ), sample) { sample = it; updatePreview() }
         content.choice(getString(R.string.preview_surface), listOf(
             StyleOption("dark", getString(R.string.dark_surface)),
@@ -108,6 +113,9 @@ class WidgetConfigurationActivity : Activity() {
 
     private fun buildControls() {
         controls.removeAllViews()
+        controls.choice(getString(R.string.language), SpokenTime.languages.map {
+            StyleOption(it.code, it.name)
+        }, draft.languageCode) { change(draft.copy(languageCode = it)) }
         val palette = StyleCatalog.colors.map { StyleOption(it.id, it.name, color = it.argb) }
         controls.choice(getString(R.string.text_color), listOf(StyleOption("automatic", getString(R.string.automatic))) + palette, draft.colorId) {
             change(draft.copy(colorId = it))
@@ -145,9 +153,9 @@ class WidgetConfigurationActivity : Activity() {
 
     private fun updatePreview() {
         val text = when (sample) {
-            "short" -> "negen uur"
-            "long" -> "negentien over twaalf"
-            else -> ClockViews.currentText()
+            "short" -> SpokenTime.format(draft.languageCode, 9, 0)
+            "long" -> SpokenTime.format(draft.languageCode, 12, 19)
+            else -> ClockViews.currentText(draft.languageCode)
         }
         preview.setBackgroundColor(if (lightPreview) Color.rgb(229, 225, 214) else Color.rgb(43, 53, 59))
         preview.show(draft, options, singleLine, text)
@@ -180,6 +188,7 @@ class WidgetConfigurationActivity : Activity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        outState.putString("language", draft.languageCode)
         outState.putString("color", draft.colorId)
         outState.putString("font", draft.fontId)
         outState.putInt("size", draft.sizePercent)

@@ -1,8 +1,11 @@
 <resources>
+    <string name="language">Language</string>
+    <string name="sample_short">Sample · 9:00</string>
+    <string name="sample_long">Sample · 12:19</string>
     <string name="license_acknowledgments">License and acknowledgments</string>
     <string name="full_license">Full license</string>
     <string name="app_name">nederlandse tijd</string>
-    <string name="widget_description">The time in Dutch words</string>
+    <string name="widget_description">The time in spoken words</string>
     <string name="preview_time">vijf voor half negen</string>
     <string name="setup_description">Add the widget to your home screen, then drag its edges to resize it. The text fits automatically and wraps on smaller widgets.</string>
     <string name="permission_description">Allow alarms and reminders so the clock can update each minute. Updates may pause while your phone sleeps or saves battery.</string>
@@ -13,7 +16,7 @@
     <string name="add_widget_manually">To add the widget, touch and hold your home screen and choose Widgets, then nederlandse tijd.</string>
     <string name="permission_settings_unavailable">Open Settings, find this app, and allow Alarms &amp; reminders.</string>
     <string name="row_widget_name">nederlandse tijd — één regel</string>
-    <string name="row_widget_description">The time in Dutch words on a single row</string>
+    <string name="row_widget_description">The time in spoken words on a single row</string>
     <string name="add_row_widget">Add single-row widget</string>
     <string name="clock_unavailable">No clock app is available on this device.</string>
     <string name="my_widgets">My widgets</string>

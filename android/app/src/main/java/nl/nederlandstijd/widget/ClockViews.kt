@@ -1,5 +1,6 @@
 package nl.nederlandstijd.widget
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.res.ColorStateList
@@ -16,8 +17,8 @@ import java.util.Calendar
 import kotlin.math.pow
 
 internal object ClockViews {
-    fun currentText(): String = Calendar.getInstance().run {
-        DutchTimeFormatter.format(get(Calendar.HOUR_OF_DAY), get(Calendar.MINUTE))
+    fun currentText(languageCode: String = SpokenTime.defaultLanguage()): String = Calendar.getInstance().run {
+        SpokenTime.format(languageCode, get(Calendar.HOUR_OF_DAY), get(Calendar.MINUTE))
     }
 
     data class Geometry(val sizes: List<SizeF>, val responsive: Boolean)
@@ -42,10 +43,10 @@ internal object ClockViews {
 
     /** Complete any expensive cache misses before sampling the time for publication. */
     fun prepare(context: Context, geometry: Geometry, ink: ClockInk, singleLine: Boolean, style: WidgetStyle = WidgetStyle(), checkActive: () -> Unit) {
-        val selected = style.sanitized()
+        val selected = style
         for (size in geometry.sizes) {
             checkActive()
-            StableClockText.fit(context, "", size.width, size.height, ClockFont.layoutFor(effectiveInk(ink, selected), selected.fontId), singleLine, selected.sizePercent, checkActive)
+            StableClockText.fit(context, "", size.width, size.height, ClockFont.layoutFor(effectiveInk(ink, selected), selected.fontId), singleLine, selected.sizePercent, selected.languageCode, checkActive)
         }
     }
 
@@ -53,23 +54,26 @@ internal object ClockViews {
         context: Context,
         widthDp: Float,
         heightDp: Float,
-        text: String = currentText(),
+        text: String? = null,
         ink: ClockInk = ClockInk.Light,
         singleLine: Boolean = false,
         partial: Boolean = false,
         style: WidgetStyle = WidgetStyle(),
     ): RemoteViews {
-        val selected = style.sanitized()
+        val selected = style
         val effectiveInk = effectiveInk(ink, selected)
         val layoutId = ClockFont.layoutFor(effectiveInk, selected.fontId)
-        val fit = StableClockText.fit(context, text, widthDp, heightDp, layoutId, singleLine, selected.sizePercent)
+        val phrase = text ?: currentText(selected.languageCode)
+        val fit = StableClockText.fit(context, phrase, widthDp, heightDp, layoutId, singleLine, selected.sizePercent, selected.languageCode)
         return RemoteViews(context.packageName, layoutId).apply {
-            setTextViewText(R.id.clock_text, text)
+            setTextViewText(R.id.clock_text, phrase)
+            setInt(R.id.clock_text, "setLayoutDirection", android.text.TextUtils.getLayoutDirectionFromLocale(java.util.Locale.forLanguageTag(selected.languageCode)))
+            @SuppressLint("RtlHardcoded") // Explicit Left and Right choices must stay physical in RTL locales.
             val gravity = when (selected.alignment) {
                 WidgetAlignment.AUTO -> if (fit.lineCount == 1) Gravity.CENTER else Gravity.TOP or Gravity.START
-                WidgetAlignment.START -> Gravity.CENTER_VERTICAL or Gravity.START
+                WidgetAlignment.START -> Gravity.CENTER_VERTICAL or Gravity.LEFT
                 WidgetAlignment.CENTER -> Gravity.CENTER
-                WidgetAlignment.END -> Gravity.CENTER_VERTICAL or Gravity.END
+                WidgetAlignment.END -> Gravity.CENTER_VERTICAL or Gravity.RIGHT
             }
             setInt(R.id.clock_text, "setGravity", gravity)
             if (!partial) {
@@ -130,11 +134,11 @@ internal object ClockViews {
     fun forWidget(
         context: Context,
         options: Bundle,
-        text: String = currentText(),
+        text: String? = null,
         ink: ClockInk = ClockInk.Light,
         singleLine: Boolean = false,
         style: WidgetStyle = WidgetStyle(),
-    ): RemoteViews = forGeometry(context, geometry(options), text, ink, singleLine, style = style)
+    ): RemoteViews = forGeometry(context, geometry(options), text ?: currentText(style.languageCode), ink, singleLine, style = style)
 
     fun forGeometry(
         context: Context,

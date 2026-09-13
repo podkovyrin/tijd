@@ -13,6 +13,8 @@ import android.widget.TextView
 import kotlin.math.abs
 import kotlin.math.ceil
 import java.security.MessageDigest
+import java.text.BreakIterator
+import java.util.Locale
 
 /** One font size per widget geometry and system font configuration, valid for the whole day. */
 internal object StableClockText {
@@ -25,23 +27,39 @@ internal object StableClockText {
         val singleLine: Boolean,
         val sizePercent: Int,
         val configuration: Configuration,
+        val languageCode: String,
     )
 
     private val sizes = LruCache<CacheKey, Float>(64)
-    private val phrases by lazy {
-        (0..11).flatMap { hour -> (0..59).map { minute -> DutchTimeFormatter.format(hour, minute) } }
-            .distinct().sortedByDescending { it.length }
+    private data class Phrase(val text: String, val breaks: Set<Int>)
+    private val phraseCache = LruCache<String, List<Phrase>>(4)
+
+    private fun phrases(languageCode: String): List<Phrase> = synchronized(phraseCache) {
+        phraseCache.get(languageCode) ?: run {
+            val iterator = BreakIterator.getLineInstance(Locale.forLanguageTag(languageCode))
+            (0..23).flatMap { hour ->
+                (0..59).map { minute -> SpokenTime.format(languageCode, hour, minute) }
+            }.distinct().sortedByDescending { it.length }.map { text ->
+                iterator.setText(text)
+                val breaks = mutableSetOf<Int>()
+                var boundary = iterator.first()
+                while (boundary != BreakIterator.DONE) {
+                    breaks.add(boundary)
+                    boundary = iterator.next()
+                }
+                Phrase(text, breaks)
+            }.also { phraseCache.put(languageCode, it) }
+        }
     }
 
-    private val words by lazy { phrases.flatMap { it.split(' ') }.distinct().sortedByDescending { it.length } }
-
     @SuppressLint("ApplySharedPref") // Rare cache writes finish on IO before the broadcast completes.
-    fun fit(context: Context, text: String, widthDp: Float, heightDp: Float, layoutId: Int, singleLine: Boolean, sizePercent: Int = 100, checkActive: () -> Unit = {}): TextFit {
+    fun fit(context: Context, text: String, widthDp: Float, heightDp: Float, layoutId: Int, singleLine: Boolean, sizePercent: Int = 100, languageCode: String = SpokenTime.defaultLanguage(), checkActive: () -> Unit = {}): TextFit {
         val metrics = context.resources.displayMetrics
         val key = CacheKey(
             (widthDp * metrics.density).toInt().coerceAtLeast(1),
             (heightDp * metrics.density).toInt().coerceAtLeast(1),
             layoutId, singleLine, sizePercent.coerceIn(50, 100), Configuration(context.resources.configuration),
+            languageCode,
         )
         // Measure the same native view used by the host, including the device's typeface.
         val view = LayoutInflater.from(context).inflate(layoutId, FrameLayout(context), false) as TextView
@@ -80,7 +98,7 @@ internal object StableClockText {
         val weight = if (Build.VERSION.SDK_INT >= 31) fontWeightAdjustment else 0
         // Use resource-affecting values, not Configuration.toString's transient sequence numbers.
         listOf(BuildConfig.VERSION_CODE, Build.FINGERPRINT, key.widthPx, key.heightPx, key.layoutId,
-            key.singleLine, key.sizePercent, fontScale, densityDpi, uiMode, screenLayout, orientation, screenWidthDp,
+            key.singleLine, key.sizePercent, key.languageCode, fontScale, densityDpi, uiMode, screenLayout, orientation, screenWidthDp,
             screenHeightDp, smallestScreenWidthDp, weight, languages, mcc, mnc, touchscreen,
             keyboard, keyboardHidden, hardKeyboardHidden, navigation, navigationHidden).joinToString("|")
     }
@@ -93,14 +111,15 @@ internal object StableClockText {
         val contentHeight = key.heightPx - view.compoundPaddingTop - view.compoundPaddingBottom - shadowInset
         if (contentWidth <= 0 || contentHeight <= 0) return 0f
 
+        val phrases = phrases(key.languageCode)
         fun fitsEveryPhrase(size: Float): Boolean = phrases.all { phrase ->
             checkActive()
-            measure(view, phrase, size, key)
+            measure(view, phrase.text, size, key)
             val layout = checkNotNull(view.layout)
             (!key.singleLine || layout.lineCount == 1) && layout.height <= contentHeight &&
                 (0 until layout.lineCount).all { line ->
                     val end = layout.getLineEnd(line)
-                    val wholeWords = end == phrase.length || phrase[end - 1] == ' ' || phrase[end] == ' '
+                    val wholeWords = end in phrase.breaks
                     wholeWords && layout.getLineMax(line) <= contentWidth
                 }
         }
@@ -108,7 +127,9 @@ internal object StableClockText {
         // Word widths provide a monotonic upper bound. Full line layout does not: a
         // slightly smaller font can move an extra word onto a nearly full line. Searching
         // that predicate with binary search can incorrectly settle on a much smaller size.
-        val unwrappedParts = if (key.singleLine) phrases else words
+        val unwrappedParts = if (key.singleLine) phrases.map { it.text } else phrases.flatMap { phrase ->
+            phrase.breaks.sorted().zipWithNext { start, end -> phrase.text.substring(start, end).trim() }
+        }.distinct()
         fun fitsUnwrappedParts(size: Int): Boolean {
             checkActive()
             view.setTextSize(TypedValue.COMPLEX_UNIT_PX, size.toFloat())
@@ -138,6 +159,8 @@ internal object StableClockText {
     }
 
     private fun measure(view: TextView, text: String, size: Float, key: CacheKey) {
+        view.textDirection = View.TEXT_DIRECTION_FIRST_STRONG
+        view.layoutDirection = android.text.TextUtils.getLayoutDirectionFromLocale(Locale.forLanguageTag(key.languageCode))
         view.text = text
         view.setTextSize(TypedValue.COMPLEX_UNIT_PX, size)
         view.measure(

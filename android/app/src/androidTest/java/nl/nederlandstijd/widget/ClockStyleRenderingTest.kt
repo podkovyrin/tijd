@@ -16,10 +16,10 @@ class ClockStyleRenderingTest {
     @Test fun nativeFontsAndScaledSizesFitEveryPhrase() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val context = instrumentation.targetContext
-        val phrases = (0..11).flatMap { hour -> (0..59).map { DutchTimeFormatter.format(hour, it) } }.distinct()
+        val phrases = (0..11).flatMap { hour -> (0..59).map { SpokenTime.format("nl", hour, it) } }.distinct()
         for ((font, percent) in listOf("serif" to 85, "mono" to 70)) {
             val choice = ClockFont.available().first { it.id == font }
-            val style = WidgetStyle(fontId = font, sizePercent = percent)
+            val style = WidgetStyle(fontId = font, sizePercent = percent, languageCode = "nl")
             val density = context.resources.displayMetrics.density
             instrumentation.runOnMainSync {
                 val view = ClockViews.create(context, 110f, 110f, phrases.first(), style = style)
@@ -65,12 +65,12 @@ class ClockStyleRenderingTest {
         instrumentation.runOnMainSync {
             val context = instrumentation.targetContext
             val color = StyleCatalog.colors.first()
-            val style = WidgetStyle(colorId = color.id, backgroundId = color.id, alignment = WidgetAlignment.END)
+            val style = WidgetStyle(colorId = color.id, backgroundId = color.id, alignment = WidgetAlignment.END, languageCode = "nl")
             val view = ClockViews.create(context, 250f, 110f, style = style).apply(context, FrameLayout(context)) as TextView
             assertEquals(color.argb, view.currentTextColor)
             ClockViews.create(context, 250f, 110f, "negen uur", partial = true, style = style).reapply(context, view)
             assertEquals(color.argb, view.currentTextColor)
-            assertEquals(Gravity.END or Gravity.CENTER_VERTICAL, view.gravity)
+            assertEquals(Gravity.RIGHT or Gravity.CENTER_VERTICAL, view.gravity)
             ClockViews.create(context, 250f, 110f).reapply(context, view)
             assertEquals(Color.WHITE, view.currentTextColor)
             if (android.os.Build.VERSION.SDK_INT >= 31) assertEquals(Color.TRANSPARENT, view.backgroundTintList?.defaultColor)

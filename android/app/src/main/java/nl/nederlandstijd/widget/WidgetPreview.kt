@@ -31,7 +31,7 @@ internal class WidgetPreview(context: Context, private val scope: CoroutineScope
         importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
     }
 
-    fun show(style: WidgetStyle, options: Bundle, singleLine: Boolean, phrase: String = ClockViews.currentText()) {
+    fun show(style: WidgetStyle, options: Bundle, singleLine: Boolean, phrase: String = ClockViews.currentText(style.languageCode)) {
         this.style = style
         this.options = Bundle(options)
         this.singleLine = singleLine

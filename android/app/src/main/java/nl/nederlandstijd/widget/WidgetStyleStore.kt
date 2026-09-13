@@ -1,36 +1,24 @@
 package nl.nederlandstijd.widget
 
 import android.content.Context
-import android.content.SharedPreferences
 import org.json.JSONObject
 
 /** One complete record per widget makes writes atomic and prevents settings leaking between widgets. */
 internal class WidgetStyleStore(context: Context) {
-    private val context = context.applicationContext
     private val preferences = context.getSharedPreferences("widget_styles", Context.MODE_PRIVATE)
 
-    // Existing widgets keep the original appearance until explicitly configured.
-    fun read(id: Int): WidgetStyle = decode(preferences.all[key(id)] as? String)
-    fun defaults(): WidgetStyle = decode(preferences.all[DEFAULTS] as? String)
+    fun read(id: Int): WidgetStyle = decode(preferences.getString(key(id), null))
+    fun defaults(): WidgetStyle = decode(preferences.getString(DEFAULTS, null))
     fun contains(id: Int): Boolean = preferences.contains(key(id))
 
     fun save(id: Int, style: WidgetStyle, useAsDefault: Boolean = false): Boolean = synchronized(lock) {
         val editor = preferences.edit()
-        if (useAsDefault) writeDefaults(editor, style)
+        if (useAsDefault) editor.putString(DEFAULTS, encode(style))
         editor.putString(key(id), encode(style)).commit()
     }
 
     fun saveDefaults(style: WidgetStyle): Boolean = synchronized(lock) {
-        val editor = preferences.edit()
-        writeDefaults(editor, style)
-        editor.commit()
-    }
-
-    private fun writeDefaults(editor: SharedPreferences.Editor, style: WidgetStyle) {
-        // Freeze existing widgets before changing the appearance inherited by future widgets.
-        val previous = encode(defaults())
-        MinuteScheduler.widgetIds(context).filterNot(::contains).forEach { editor.putString(key(it), previous) }
-        editor.putString(DEFAULTS, encode(style))
+        preferences.edit().putString(DEFAULTS, encode(style)).commit()
     }
 
     /** Each instance snapshots defaults once, never follows them live. */
@@ -61,30 +49,26 @@ internal class WidgetStyleStore(context: Context) {
 
     private fun key(id: Int) = "widget_$id"
 
-    private fun encode(style: WidgetStyle): String = style.sanitized().let {
+    private fun encode(style: WidgetStyle): String = style.let {
         JSONObject().put("color", it.colorId).put("font", it.fontId)
             .put("size", it.sizePercent).put("alignment", it.alignment.name)
             .put("background", it.backgroundId).put("opacity", it.backgroundOpacity)
-            .put("radius", it.cornerRadius).toString()
+            .put("radius", it.cornerRadius).put("language", it.languageCode).toString()
     }
 
     private fun decode(value: String?): WidgetStyle {
         if (value == null) return WidgetStyle()
-        return try {
-            val data = JSONObject(value)
-            WidgetStyle(
-                colorId = data.optString("color", "automatic"),
-                fontId = data.optString("font", "automatic"),
-                sizePercent = data.optInt("size", 100),
-                alignment = WidgetAlignment.entries.firstOrNull { it.name == data.optString("alignment") }
-                    ?: WidgetAlignment.AUTO,
-                backgroundId = data.optString("background", "transparent"),
-                backgroundOpacity = data.optInt("opacity", 60),
-                cornerRadius = data.optInt("radius", 16),
-            ).sanitized()
-        } catch (_: org.json.JSONException) {
-            WidgetStyle()
-        }
+        val data = JSONObject(value)
+        return WidgetStyle(
+            languageCode = data.getString("language"),
+            colorId = data.getString("color"),
+            fontId = data.getString("font"),
+            sizePercent = data.getInt("size"),
+            alignment = WidgetAlignment.valueOf(data.getString("alignment")),
+            backgroundId = data.getString("background"),
+            backgroundOpacity = data.getInt("opacity"),
+            cornerRadius = data.getInt("radius"),
+        )
     }
 
     private companion object {

@@ -5,6 +5,7 @@ plugins {
 android {
     namespace = "nl.nederlandstijd.widget"
     compileSdk = 37
+    ndkVersion = "28.1.13356709"
 
     defaultConfig {
         applicationId = "nl.nederlandstijd.widget"
@@ -13,6 +14,13 @@ android {
         versionCode = 6
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "4.1.2"
+        }
     }
 
     buildFeatures { buildConfig = true }

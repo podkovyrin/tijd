@@ -28,12 +28,12 @@ class ClockViewsTest {
             for ((width, height, singleLine) in listOf(Triple(110, 110, false), Triple(250, 110, false), Triple(110, 40, false), Triple(350, 200, false), Triple(350, 60, true), Triple(220, 60, true))) {
                 val density = context.resources.displayMetrics.density
                 val phrases = (0..11).flatMap { hour ->
-                    (0..59).map { minute -> DutchTimeFormatter.format(hour, minute) }
+                    (0..59).map { minute -> SpokenTime.format("nl", hour, minute) }
                 }.distinct()
                 var stableSize: Float? = null
                 for (phrase in phrases) {
                     instrumentation.runOnMainSync {
-                        val root = ClockViews.create(context, width.toFloat(), height.toFloat(), phrase, singleLine = singleLine)
+                        val root = ClockViews.create(context, width.toFloat(), height.toFloat(), phrase, singleLine = singleLine, style = WidgetStyle(languageCode = "nl"))
                             .apply(context, FrameLayout(context))
                         val text = root.findViewById<TextView>(R.id.clock_text)
                         root.measure(
@@ -83,14 +83,14 @@ class ClockViewsTest {
             val context = instrumentation.targetContext
             val density = context.resources.displayMetrics.density
             for (ink in ClockInk.entries) {
-                val view = ClockViews.create(context, 350f, 60f, "negen uur", ink)
+                val view = ClockViews.create(context, 350f, 60f, "negen uur", ink, style = WidgetStyle(languageCode = "nl"))
                     .apply(context, FrameLayout(context)) as TextView
                 for ((width, height, phrase) in listOf(
                     Triple(350, 60, "negen uur"),
                     Triple(110, 110, "negentien over twaalf"),
                     Triple(350, 60, "kwart voor negen"),
                 )) {
-                    ClockViews.create(context, width.toFloat(), height.toFloat(), phrase, ink).reapply(context, view)
+                    ClockViews.create(context, width.toFloat(), height.toFloat(), phrase, ink, style = WidgetStyle(languageCode = "nl")).reapply(context, view)
                     view.measure(
                         View.MeasureSpec.makeMeasureSpec((width * density).toInt(), View.MeasureSpec.EXACTLY),
                         View.MeasureSpec.makeMeasureSpec((height * density).toInt(), View.MeasureSpec.EXACTLY),
@@ -123,7 +123,7 @@ class ClockViewsTest {
             val context = instrumentation.targetContext
             val density = context.resources.displayMetrics.density
             fun render(width: Int, height: Int): TextView {
-                val view = ClockViews.create(context, width.toFloat(), height.toFloat(), "negentien over twaalf")
+                val view = ClockViews.create(context, width.toFloat(), height.toFloat(), "negentien over twaalf", style = WidgetStyle(languageCode = "nl"))
                     .apply(context, FrameLayout(context)) as TextView
                 view.measure(
                     View.MeasureSpec.makeMeasureSpec((width * density).toInt(), View.MeasureSpec.EXACTLY),
@@ -169,7 +169,7 @@ class ClockViewsTest {
         instrumentation.runOnMainSync {
             for (ink in ClockInk.entries) {
                 val context = instrumentation.targetContext
-                val root = ClockViews.create(context, 250f, 110f, "kwart voor twaalf", ink)
+                val root = ClockViews.create(context, 250f, 110f, "kwart voor twaalf", ink, style = WidgetStyle(languageCode = "nl"))
                     .apply(context, FrameLayout(context)) as TextView
                 assertEquals(if (ink == ClockInk.Light) Color.WHITE else Color.BLACK, root.currentTextColor)
                 assertTrue(root.shadowRadius > 0)

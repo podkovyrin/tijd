@@ -8,7 +8,7 @@
         <item name="android:padding">@dimen/widget_padding</item>
         <item name="android:gravity">top|start</item>
         <item name="android:layoutDirection">ltr</item>
-        <item name="android:textDirection">ltr</item>
+        <item name="android:textDirection">firstStrong</item>
         <item name="android:textAlignment">gravity</item>
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
         <item name="android:fontFamily">sans-serif-medium</item>
