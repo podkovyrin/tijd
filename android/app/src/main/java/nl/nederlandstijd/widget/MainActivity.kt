@@ -1,6 +1,7 @@
 package nl.nederlandstijd.widget
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.appwidget.AppWidgetManager
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
@@ -9,9 +10,12 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
@@ -54,7 +58,34 @@ class MainActivity : Activity() {
         content.label(getString(R.string.my_widgets), heading = true)
         widgetList = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         content.addView(widgetList)
+        Button(this).apply {
+            setText(R.string.license_acknowledgments)
+            setOnClickListener { showLicenseText(R.string.license_acknowledgments, R.raw.project_notice, true) }
+            content.addView(this)
+        }
+    }
 
+    private fun showLicenseText(title: Int, resource: Int, showFullLicense: Boolean = false) {
+        val text = TextView(this).apply {
+            text = resources.openRawResource(resource).bufferedReader().use { it.readText() }
+            setPadding(dp(20), dp(16), dp(20), dp(16))
+            setTextIsSelectable(true)
+            Linkify.addLinks(this, Linkify.WEB_URLS)
+            movementMethod = LinkMovementMethod.getInstance()
+        }
+        val scroll = ScrollView(this).apply { addView(text) }
+        AlertDialog.Builder(this)
+            .setTitle(title)
+            .setView(scroll)
+            .setPositiveButton(android.R.string.ok, null)
+            .apply {
+                if (showFullLicense) {
+                    setNeutralButton(R.string.full_license) { _, _ ->
+                        showLicenseText(R.string.full_license, R.raw.project_license)
+                    }
+                }
+            }
+            .show()
     }
 
     override fun onResume() {

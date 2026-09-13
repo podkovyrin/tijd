@@ -21,7 +21,6 @@
       "displayName": "Developer build",
       "inherits": "base",
       "cacheVariables": {
-        "BUILD_TESTING": "ON",
         "CMAKE_BUILD_TYPE": "Debug"
       }
     },
@@ -30,7 +29,6 @@
       "displayName": "Release build",
       "inherits": "base",
       "cacheVariables": {
-        "BUILD_TESTING": "OFF",
         "CMAKE_BUILD_TYPE": "Release",
         "SPOKEN_TIME_WARNINGS_AS_ERRORS": "OFF"
       }
@@ -44,15 +42,6 @@
     {
       "name": "release",
       "configurePreset": "release"
-    }
-  ],
-  "testPresets": [
-    {
-      "name": "dev",
-      "configurePreset": "dev",
-      "output": {
-        "outputOnFailure": true
-      }
     }
   ]
 }

@@ -1,4 +1,6 @@
 <resources>
+    <string name="license_acknowledgments">License and acknowledgments</string>
+    <string name="full_license">Full license</string>
     <string name="app_name">nederlandse tijd</string>
     <string name="widget_description">The time in Dutch words</string>
     <string name="preview_time">vijf voor half negen</string>

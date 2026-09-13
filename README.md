@@ -17,8 +17,7 @@ Edit a widget from **My widgets**, or use your launcher’s widget settings wher
 
 ## Implementation
 
-- `cpp-spoken-time` is the platform-neutral C++20 library. Its build and package boundaries are
-  bootstrapped, but its formatting API is intentionally not defined yet.
+- `cpp-spoken-time` is the platform-neutral C++20 library with 91 language, script, and regional entries.
 - `android` contains the existing Android widget.
 - `WidgetStyle`, `StyleCatalog`, and `WidgetStyleStore` define validated settings, the curated palette, and atomic per-widget storage. Defaults are copied when a widget is created.
 - `ClockFont`, `StableClockText`, and `ClockViews` render native text and fit every possible time phrase. Font-specific XML layouts keep host rendering and measurement identical without rasterizing text.
@@ -41,4 +40,14 @@ Use `mise run build` to build both host C++ and Android debug artifacts, or run 
 `./android/gradlew -p android connectedDebugAndroidTest` with an emulator for native rendering,
 configuration, and widget lifecycle checks.
 
-[MIT license](LICENSE).
+## License and acknowledgments
+
+The original project code and documentation, including the C++ library and Android app,
+are licensed under the [MIT License](LICENSE). Third-party components retain their own
+licenses.
+
+Anastasiia I. Puchkova's [“Clock time expression in languages of Europe” (2025)](https://journals.rcsi.science/2306-5737/article/view/416861)
+was consulted while developing the C++ formatters. See [NOTICE](NOTICE) for the full
+acknowledgment, source license, and description of the project's use of the article.
+Android includes these notices under **License and acknowledgments**; C++ installations
+include them under `share/doc/spoken_time`.

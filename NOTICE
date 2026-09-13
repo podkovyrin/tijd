@@ -1,0 +1,33 @@
+Spoken Time — License and acknowledgments
+
+Copyright (c) 2026 Andrei Podkovyrin
+
+The original project code and documentation, including the C++ library and
+Android app, are licensed under the MIT License. The full license, including
+its disclaimer of warranties and limitation of liability, accompanies the
+project in LICENSE (available as Full license in the Android app).
+Third-party components retain their respective copyrights and licenses;
+the project's MIT License does not replace their terms.
+
+Article acknowledgment
+
+Anastasiia I. Puchkova, “Clock time expression in languages of Europe.”
+Acta Linguistica Petropolitana, 2025, Vol. 21 (1), pp. 109–162.
+DOI: 10.30842/alp23065737211109162
+https://journals.rcsi.science/2306-5737/article/view/416861
+
+Copyright (c) 2025 Puchkova A.I.
+Article license: CC BY-NC-SA 4.0
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+The article is provided subject to that license's disclaimer of warranties.
+This license identifies the article's terms; the project's original code
+and documentation are licensed under MIT as stated above.
+
+The article was consulted as a linguistic reference while developing the
+C++ spoken-time formatters. The implementation independently expresses
+linguistic rules in C++ code, number-word and grammatical-form tables,
+and an API. The software does not reproduce the article's text or tables.
+No endorsement by the article author is implied.
+
+This notice does not claim exclusive rights over linguistic facts, ordinary
+words, or methods of expressing time.
