@@ -1,7 +1,7 @@
 package nl.nederlandstijd.widget
 
-import android.app.Activity
-import android.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import android.appwidget.AppWidgetManager
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
@@ -25,56 +25,55 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 /** Setup and an inventory of installed widget instances; editing lives in its own activity. */
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var widgetList: LinearLayout
     private lateinit var permissionStatus: TextView
+    private lateinit var permissionDescription: TextView
     private lateinit var permissionButton: Button
     private val activityScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val content = settingsContent()
-        fun label(resource: Int) = content.label(getString(resource))
-        label(R.string.app_name).setTextAppearance(android.R.style.TextAppearance_Material_Headline)
-        label(R.string.setup_description)
-        label(R.string.permission_description)
-        permissionStatus = label(R.string.permission_missing)
-        permissionButton = Button(this).apply {
-            setText(R.string.allow_updates)
-            setOnClickListener { requestMinutePermission() }
-            content.addView(this)
+        content.label(getString(R.string.welcome_title), heading = true).apply {
+            setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_DisplaySmall)
+            typeface = android.graphics.Typeface.create("sans-serif-medium", android.graphics.Typeface.NORMAL)
+            setPadding(0, dp(8), 0, dp(4))
         }
-        Button(this).apply {
-            setText(R.string.add_widget)
-            setOnClickListener { addWidget(DutchTimeWidgetReceiver::class.java) }
-            content.addView(this)
-        }
-        Button(this).apply {
-            setText(R.string.add_row_widget)
-            setOnClickListener { addWidget(DutchTimeRowWidgetReceiver::class.java) }
-            content.addView(this)
-        }
-        label(R.string.lock_screen_note)
+        content.label(getString(R.string.setup_description)).setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyLarge)
+        content.action(getString(R.string.add_widget), primary = true) { chooseLayout() }.setIconResource(R.drawable.ic_add)
         content.label(getString(R.string.my_widgets), heading = true)
+        content.label(getString(R.string.widget_collection_note))
         widgetList = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         content.addView(widgetList)
-        Button(this).apply {
-            setText(R.string.license_acknowledgments)
-            setOnClickListener { showLicenseText(R.string.license_acknowledgments, R.raw.project_notice, true) }
-            content.addView(this)
+        val permissionCard = content.card()
+        permissionStatus = permissionCard.label(getString(R.string.permission_missing)).apply {
+            setTextColor(getColor(R.color.ui_ink))
+            textSize = 16f
         }
+        permissionDescription = permissionCard.label(getString(R.string.permission_description))
+        permissionButton = permissionCard.action(getString(R.string.allow_updates)) { requestMinutePermission() }
+        content.action(getString(R.string.license_acknowledgments)) {
+            showLicenseText(R.string.license_acknowledgments, R.raw.project_notice, true)
+        }.setIconResource(R.drawable.ic_info)
     }
 
     private fun showLicenseText(title: Int, resource: Int, showFullLicense: Boolean = false) {
         val text = TextView(this).apply {
-            text = resources.openRawResource(resource).bufferedReader().use { it.readText() }
+            text = resources.openRawResource(resource).bufferedReader().use { it.readText() } +
+                if (resource == R.raw.project_notice) "\n\n" + resources.openRawResource(R.raw.material_icons_license)
+                    .bufferedReader().use {
+                        // The appendix is an authoring template, not part of the reading view.
+                        // Keep the bundled upstream license complete.
+                        it.readText().substringBefore("\n   APPENDIX:").trimEnd()
+                    } else ""
             setPadding(dp(20), dp(16), dp(20), dp(16))
             setTextIsSelectable(true)
             Linkify.addLinks(this, Linkify.WEB_URLS)
             movementMethod = LinkMovementMethod.getInstance()
         }
         val scroll = ScrollView(this).apply { addView(text) }
-        AlertDialog.Builder(this)
+        MaterialAlertDialogBuilder(this)
             .setTitle(title)
             .setView(scroll)
             .setPositiveButton(android.R.string.ok, null)
@@ -92,6 +91,10 @@ class MainActivity : Activity() {
         super.onResume()
         val allowed = MinuteScheduler.canSchedule(this)
         permissionStatus.setText(if (allowed) R.string.permission_granted else R.string.permission_missing)
+        permissionStatus.setCompoundDrawablesRelativeWithIntrinsicBounds(if (allowed) R.drawable.ic_check else 0, 0, 0, 0)
+        permissionStatus.compoundDrawablePadding = dp(8)
+        permissionStatus.compoundDrawableTintList = android.content.res.ColorStateList.valueOf(getColor(R.color.ui_accent))
+        permissionDescription.visibility = if (allowed) View.GONE else View.VISIBLE
         permissionButton.visibility = if (allowed) View.GONE else View.VISIBLE
         showWidgets()
         MinuteScheduler.scheduleNext(this)
@@ -107,23 +110,54 @@ class MainActivity : Activity() {
         widgetList.removeAllViews()
         val ids = MinuteScheduler.widgetIds(this).sorted()
         val manager = AppWidgetManager.getInstance(this)
-        if (ids.isEmpty()) widgetList.label(getString(R.string.my_widgets_empty))
+        if (ids.isEmpty()) {
+            val empty = widgetList.card()
+            empty.label(getString(R.string.first_widget), heading = true)
+            val preview = WidgetPreview(this, activityScope)
+            empty.addView(preview, LinearLayout.LayoutParams(-1, dp(156)))
+            preview.show(WidgetStyleStore(this).defaults(), Bundle().apply {
+                putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 200)
+                putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 140)
+            }, false)
+            empty.label(getString(R.string.my_widgets_empty))
+        }
         for (id in ids) {
             val info = manager.getAppWidgetInfo(id) ?: continue
             val row = info.provider == ComponentName(this, DutchTimeRowWidgetReceiver::class.java)
             val type = getString(if (row) R.string.single_row_widget else R.string.compact_widget)
-            widgetList.label(getString(R.string.widget_card, type, id))
+            val style = WidgetStyleStore(this).read(id)
+            val card = widgetList.card()
+            card.label(type, heading = true).apply { setPadding(0, dp(4), 0, dp(4)); textSize = 20f }
+            card.label(LanguagePicker.displayName(style.languageCode))
             val preview = WidgetPreview(this, activityScope)
-            widgetList.addView(preview, LinearLayout.LayoutParams(-1, dp(140)))
-            preview.show(WidgetStyleStore(this).read(id), manager.getAppWidgetOptions(id), row)
-            widgetList.addView(Button(this).apply {
-                setText(R.string.edit_style)
-                contentDescription = getString(R.string.edit_widget_title, id)
-                setOnClickListener {
-                    startActivity(Intent(this@MainActivity, WidgetConfigurationActivity::class.java)
-                        .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id))
-                }
-            })
+            card.addView(preview, LinearLayout.LayoutParams(-1, dp(156)))
+            preview.show(style, manager.getAppWidgetOptions(id), row)
+            card.label(getString(R.string.tap_to_edit)).apply {
+                setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_edit, 0)
+                compoundDrawableTintList = android.content.res.ColorStateList.valueOf(getColor(R.color.ui_accent))
+                compoundDrawablePadding = dp(8)
+                setTextColor(getColor(R.color.ui_accent))
+                gravity = android.view.Gravity.END
+            }
+            // The Material card provides ripple, focus and a single accessible edit action.
+            val target = card.parent as com.google.android.material.card.MaterialCardView
+            target.isFocusable = true
+            target.isClickable = true
+            target.descendantFocusability = android.view.ViewGroup.FOCUS_BLOCK_DESCENDANTS
+            card.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+            target.contentDescription = getString(
+                R.string.widget_edit_accessibility, id, type, LanguagePicker.displayName(style.languageCode),
+            )
+            target.setOnClickListener {
+                startActivity(Intent(this, WidgetConfigurationActivity::class.java)
+                    .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id))
+            }
+        }
+    }
+
+    private fun chooseLayout() {
+        WidgetLayoutPicker.show(this, activityScope) { row ->
+            addWidget(if (row) DutchTimeRowWidgetReceiver::class.java else DutchTimeWidgetReceiver::class.java)
         }
     }
 
@@ -140,7 +174,9 @@ class MainActivity : Activity() {
     private fun addWidget(receiver: Class<out DutchTimeWidgetReceiver>) {
         val manager = AppWidgetManager.getInstance(this)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && manager.isRequestPinAppWidgetSupported) {
-            manager.requestPinAppWidget(ComponentName(this, receiver), null, null)
+            if (!manager.requestPinAppWidget(ComponentName(this, receiver), null, null)) {
+                Toast.makeText(this, R.string.add_widget_manually, Toast.LENGTH_LONG).show()
+            }
         } else {
             Toast.makeText(this, R.string.add_widget_manually, Toast.LENGTH_LONG).show()
         }

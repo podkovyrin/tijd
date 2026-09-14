@@ -1,5 +1,29 @@
 <resources>
-    <style name="AppTheme" parent="android:style/Theme.Material.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/ui_accent</item>
+        <item name="colorOnPrimary">@color/ui_on_accent</item>
+        <item name="colorPrimaryContainer">@color/ui_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/ui_ink</item>
+        <item name="colorSecondary">@color/ui_accent</item>
+        <item name="colorOnSecondary">@color/ui_on_accent</item>
+        <item name="colorSecondaryContainer">@color/ui_soft</item>
+        <item name="colorOnSecondaryContainer">@color/ui_ink</item>
+        <item name="android:colorBackground">@color/ui_screen</item>
+        <item name="colorOnBackground">@color/ui_ink</item>
+        <item name="colorSurface">@color/ui_screen</item>
+        <item name="colorSurfaceContainer">@color/ui_card</item>
+        <item name="colorSurfaceContainerLow">@color/ui_card</item>
+        <item name="colorSurfaceContainerHigh">@color/ui_soft</item>
+        <item name="colorSurfaceVariant">@color/ui_soft</item>
+        <item name="colorOnSurface">@color/ui_ink</item>
+        <item name="colorOnSurfaceVariant">@color/ui_muted</item>
+        <item name="colorOutline">@color/ui_outline</item>
+        <item name="colorOutlineVariant">@color/ui_outline_variant</item>
+        <item name="android:windowBackground">@color/ui_screen</item>
+        <item name="android:textColorPrimary">@color/ui_ink</item>
+        <item name="android:textColorSecondary">@color/ui_muted</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

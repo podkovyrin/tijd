@@ -31,6 +31,8 @@ android {
 }
 
 dependencies {
+    implementation("com.google.android.material:material:1.13.0")
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
     implementation("androidx.annotation:annotation:1.9.1")
     testImplementation("junit:junit:4.13.2")

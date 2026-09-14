@@ -26,7 +26,11 @@ internal class WidgetPreview(context: Context, private val scope: CoroutineScope
     private var phrase = ClockViews.currentText()
 
     init {
-        setBackgroundColor(Color.rgb(43, 53, 59))
+        background = android.graphics.drawable.GradientDrawable().apply {
+            setColor(Color.rgb(43, 53, 59))
+            cornerRadius = dp(18).toFloat()
+        }
+        clipToOutline = true
         minimumHeight = dp(120)
         importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
     }
@@ -62,8 +66,17 @@ internal class WidgetPreview(context: Context, private val scope: CoroutineScope
                     }
                     ClockViews.create(context, size.width, size.height, selectedPhrase, ink, row, style = selectedStyle)
                 }
-                val native = views.apply(context, this@WidgetPreview)
-                native.findViewById<TextView>(R.id.clock_text).isClickable = false
+                // Use the host-like application inflater. AppCompat's activity inflater would
+                // substitute MaterialTextView, which RemoteViews deliberately does not allow.
+                val native = views.apply(context.applicationContext, this@WidgetPreview)
+                fun disableInteractions(view: android.view.View) {
+                    view.isClickable = false
+                    view.isFocusable = false
+                    if (view is android.view.ViewGroup) {
+                        for (index in 0 until view.childCount) disableInteractions(view.getChildAt(index))
+                    }
+                }
+                disableInteractions(native)
                 val nativeWidth = dp(size.width)
                 val nativeHeight = dp(size.height)
                 val scale = min(1f, min(width.toFloat() / nativeWidth, height.toFloat() / nativeHeight))
@@ -73,7 +86,8 @@ internal class WidgetPreview(context: Context, private val scope: CoroutineScope
                 addView(native, LayoutParams(nativeWidth, nativeHeight, Gravity.CENTER))
             } catch (exception: CancellationException) {
                 throw exception
-            } catch (_: RuntimeException) {
+            } catch (exception: RuntimeException) {
+                android.util.Log.e("WidgetPreview", "Unable to render widget preview", exception)
                 removeAllViews()
                 addView(TextView(context).apply {
                     setText(R.string.preview_unavailable)

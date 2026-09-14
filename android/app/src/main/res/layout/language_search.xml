@@ -1,0 +1,11 @@
+<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:hint="@string/search_languages" app:startIconDrawable="@drawable/ic_search"
+    app:endIconMode="clear_text">
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:inputType="text" android:maxLines="1" android:singleLine="true"
+        android:contentDescription="@string/search_languages" />
+</com.google.android.material.textfield.TextInputLayout>

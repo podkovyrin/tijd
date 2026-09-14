@@ -31,3 +31,12 @@ No endorsement by the article author is implied.
 
 This notice does not claim exclusive rights over linguistic facts, ordinary
 words, or methods of expressing time.
+
+Android Material components and icons
+
+This app uses Google's Material Components for Android, AndroidX, and
+Material Design icons under the Apache License, Version 2.0.
+Material icon paths are adapted into Android vector drawables.
+https://github.com/material-components/material-components-android
+https://github.com/google/material-design-icons
+The Apache License is bundled in the app and shown with these acknowledgments.

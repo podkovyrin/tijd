@@ -1,13 +1,12 @@
 package nl.nederlandstijd.widget
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -16,8 +15,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 
-/** Owns an unsaved draft; only Save changes a widget or the defaults for future widgets. */
-class WidgetConfigurationActivity : Activity() {
+/** Every style change is persisted atomically and published while the editor stays open. */
+class WidgetConfigurationActivity : AppCompatActivity() {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private var widgetId = AppWidgetManager.INVALID_APPWIDGET_ID
     private var draft = WidgetStyle()
@@ -26,7 +25,8 @@ class WidgetConfigurationActivity : Activity() {
     private lateinit var useAsDefault: CheckBox
     private var options = Bundle()
     private var singleLine = false
-    private var sample = "current"
+    private lateinit var saveStatus: android.widget.TextView
+    private var hasSaveFailure = false
     private var lightPreview = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +42,7 @@ class WidgetConfigurationActivity : Activity() {
         options = manager.getAppWidgetOptions(widgetId)
         if (savedInstanceState != null) {
             require(listOf("color", "font", "size", "alignment", "background", "opacity", "radius", "language",
-                "sample", "lightPreview", "useAsDefault").all(savedInstanceState::containsKey))
+                "lightPreview", "useAsDefault").all(savedInstanceState::containsKey))
         }
         val store = WidgetStyleStore(this)
         draft = if (savedInstanceState == null) {
@@ -57,26 +57,38 @@ class WidgetConfigurationActivity : Activity() {
             savedInstanceState.getInt("radius"),
             requireNotNull(savedInstanceState.getString("language")),
         )
-        sample = if (savedInstanceState == null) "current" else requireNotNull(savedInstanceState.getString("sample"))
         lightPreview = savedInstanceState?.getBoolean("lightPreview") ?: false
 
-        val header = LinearLayout(this).apply {
+        val header = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        val toolbar = com.google.android.material.appbar.MaterialToolbar(this).apply {
+            setTitle(R.string.edit_widget_title)
+            setNavigationIcon(R.drawable.ic_arrow_back)
+            setNavigationIconTint(getColor(R.color.ui_ink))
+            setNavigationContentDescription(R.string.editor_done)
+            setNavigationOnClickListener { if (!hasSaveFailure || persist()) finish() }
+        }
+        header.addView(toolbar, LinearLayout.LayoutParams(-1, dp(64)))
+        val previewArea = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(dp(20), 0, dp(20), 0)
+            setPadding(dp(24), dp(8), dp(24), 0)
         }
-        header.label(getString(R.string.edit_widget_title, widgetId), heading = true)
+        header.addView(previewArea)
         preview = WidgetPreview(this, scope)
-        header.addView(preview, LinearLayout.LayoutParams(-1, dp(140)))
-        val actions = LinearLayout(this).apply {
-            setPadding(dp(20), dp(4), dp(20), dp(4))
+        previewArea.addView(preview, LinearLayout.LayoutParams(-1, dp(if (resources.configuration.screenHeightDp < 500) 72 else 140)))
+        saveStatus = previewArea.label(getString(R.string.saved_status)).apply {
+            textSize = 12f
+            accessibilityLiveRegion = android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE
         }
-        val content = settingsContent(header, actions)
-        content.label(getString(R.string.edit_widget_description))
-        content.choice(getString(R.string.preview_phrase), listOf(
-            StyleOption("current", getString(R.string.current_time)),
-            StyleOption("short", getString(R.string.sample_short)),
-            StyleOption("long", getString(R.string.sample_long)),
-        ), sample) { sample = it; updatePreview() }
+        val content = settingsContent(header)
+        controls = content.card()
+        useAsDefault = com.google.android.material.checkbox.MaterialCheckBox(this).apply {
+            setText(R.string.use_as_default)
+            isChecked = savedInstanceState?.getBoolean("useAsDefault") ?: false
+            setTextColor(getColor(R.color.ui_ink))
+            content.addView(this)
+            setOnCheckedChangeListener { _, _ -> persist() }
+        }
+        buildControls()
         content.choice(getString(R.string.preview_surface), listOf(
             StyleOption("dark", getString(R.string.dark_surface)),
             StyleOption("light", getString(R.string.light_surface)),
@@ -85,37 +97,31 @@ class WidgetConfigurationActivity : Activity() {
             updatePreview()
         }
         content.label(getString(R.string.preview_note))
-        controls = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
-        content.addView(controls)
-        buildControls()
-        useAsDefault = CheckBox(this).apply {
-            setText(R.string.use_as_default)
-            isChecked = savedInstanceState?.getBoolean("useAsDefault") ?: false
-            content.addView(this)
-        }
-        Button(this).apply {
-            setText(R.string.save_style)
-            setOnClickListener { save(this) }
-            actions.addView(this, LinearLayout.LayoutParams(0, -2, 1f))
-        }
-        Button(this).apply {
-            setText(R.string.reset_style)
-            setOnClickListener { draft = WidgetStyle(); buildControls(); updatePreview() }
-            content.addView(this)
-        }
-        Button(this).apply {
-            setText(android.R.string.cancel)
-            setOnClickListener { finish() }
-            actions.addView(this, LinearLayout.LayoutParams(0, -2, 1f))
+        content.action(getString(R.string.reset_style)) {
+            change(WidgetStyle())
+            buildControls()
         }
         updatePreview()
+        // New widget configuration must deliver RESULT_OK even without a style edit.
+        // Returning from this screen completes setup; no separate Save step is needed.
+        persist()
     }
 
     private fun buildControls() {
         controls.removeAllViews()
-        controls.choice(getString(R.string.language), SpokenTime.languages.map {
-            StyleOption(it.code, it.name)
-        }, draft.languageCode) { change(draft.copy(languageCode = it)) }
+        controls.label(getString(R.string.language))
+        val languageButton = controls.action(LanguagePicker.displayName(draft.languageCode)) { }
+        languageButton.setIconResource(R.drawable.ic_chevron_right)
+        languageButton.iconGravity = com.google.android.material.button.MaterialButton.ICON_GRAVITY_END
+        languageButton.contentDescription = getString(R.string.language_accessibility, LanguagePicker.displayName(draft.languageCode))
+        languageButton.setOnClickListener {
+            LanguagePicker.show(this, draft.languageCode) { code ->
+                change(draft.copy(languageCode = code))
+                languageButton.text = LanguagePicker.displayName(code)
+                languageButton.contentDescription = getString(R.string.language_accessibility, LanguagePicker.displayName(code))
+            }
+        }
+        controls.label(getString(R.string.appearance), heading = true)
         val palette = StyleCatalog.colors.map { StyleOption(it.id, it.name, color = it.argb) }
         controls.choice(getString(R.string.text_color), listOf(StyleOption("automatic", getString(R.string.automatic))) + palette, draft.colorId) {
             change(draft.copy(colorId = it))
@@ -148,36 +154,40 @@ class WidgetConfigurationActivity : Activity() {
     private fun change(style: WidgetStyle) {
         if (style == draft) return
         draft = style
+        persist()
         updatePreview()
     }
 
     private fun updatePreview() {
-        val text = when (sample) {
-            "short" -> SpokenTime.format(draft.languageCode, 9, 0)
-            "long" -> SpokenTime.format(draft.languageCode, 12, 19)
-            else -> ClockViews.currentText(draft.languageCode)
+        preview.background = android.graphics.drawable.GradientDrawable().apply {
+            setColor(if (lightPreview) Color.rgb(229, 225, 214) else Color.rgb(43, 53, 59))
+            cornerRadius = dp(18).toFloat()
         }
-        preview.setBackgroundColor(if (lightPreview) Color.rgb(229, 225, 214) else Color.rgb(43, 53, 59))
-        preview.show(draft, options, singleLine, text)
+        preview.show(draft, options, singleLine)
     }
 
-    private fun save(button: Button) {
-        if (!ownsWidget()) { finish(); return }
-        button.isEnabled = false
-        // A single small durable write and result delivery complete together on the UI thread.
-        // The receiver owns the longer refresh, which must survive this activity finishing.
-        if (WidgetStyleStore(this).save(widgetId, draft, useAsDefault.isChecked)) {
-            val provider = AppWidgetManager.getInstance(this).getAppWidgetInfo(widgetId)?.provider
-            if (provider != null) {
-                sendBroadcast(Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE).setComponent(provider)
-                    .putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intArrayOf(widgetId)))
+    private fun persist(): Boolean {
+        if (!ownsWidget()) { finish(); return false }
+        // Commit before navigation; publication is owned by the receiver so it survives exit.
+        val store = WidgetStyleStore(this)
+        val changed = !store.contains(widgetId) || store.read(widgetId) != draft
+        val saved = store.save(widgetId, draft, useAsDefault.isChecked)
+        hasSaveFailure = !saved
+        saveStatus.setText(if (saved) R.string.saved_status else R.string.saving_failed_status)
+        if (saved) {
+            if (changed) {
+                val provider = AppWidgetManager.getInstance(this).getAppWidgetInfo(widgetId)?.provider
+                if (provider != null) {
+                    sendBroadcast(Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE).setComponent(provider)
+                        .putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intArrayOf(widgetId)))
+                }
             }
             setResult(RESULT_OK, Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId))
-            finish()
         } else {
-            button.isEnabled = true
+            setResult(RESULT_CANCELED)
             Toast.makeText(this, R.string.save_failed, Toast.LENGTH_LONG).show()
         }
+        return saved
     }
 
     private fun ownsWidget(): Boolean {
@@ -196,7 +206,6 @@ class WidgetConfigurationActivity : Activity() {
         outState.putString("background", draft.backgroundId)
         outState.putInt("opacity", draft.backgroundOpacity)
         outState.putInt("radius", draft.cornerRadius)
-        outState.putString("sample", sample)
         outState.putBoolean("lightPreview", lightPreview)
         if (::useAsDefault.isInitialized) outState.putBoolean("useAsDefault", useAsDefault.isChecked)
     }

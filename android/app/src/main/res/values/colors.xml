@@ -1,0 +1,12 @@
+<resources>
+    <color name="ui_screen">#F6FBF4</color>
+    <color name="ui_card">#EFF5ED</color>
+    <color name="ui_soft">#DCE5DA</color>
+    <color name="ui_ink">#171D18</color>
+    <color name="ui_muted">#414942</color>
+    <color name="ui_accent">#176C46</color>
+    <color name="ui_on_accent">#FFFFFF</color>
+    <color name="ui_primary_container">#BCEFD0</color>
+    <color name="ui_outline">#717971</color>
+    <color name="ui_outline_variant">#C1C9C0</color>
+</resources>
