@@ -31,9 +31,11 @@ The Google Play title is **Tijd: Word Clock Widget**; the installed app name is 
 See the [first-release checklist](docs/release.md), [store listing draft](docs/store-listing.md),
 and [icon generation prompt](docs/icon-prompt.md).
 
-The privacy policy is bundled in the app and prepared for GitHub Pages. Follow
-the [GitHub Pages setup guide](docs/github-pages.md) when ready to publish; the
-workflow is manual and nothing is deployed just by pushing.
+Source: https://github.com/podkovyrin/tijd
+
+The [privacy policy](https://podkovyrin.github.io/tijd/privacy-policy.html) is also
+bundled in the app. See the [GitHub Pages setup guide](docs/github-pages.md) for
+publication and updates.
 
 [Mise](https://mise.jdx.dev/) pins the JDK, CMake, Ninja, and C++ formatting tools used by the
 repository. After installing Mise, run:
