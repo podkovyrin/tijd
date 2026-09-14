@@ -1,0 +1,12 @@
+Orasan sa wika at estilong gusto mo.
+
+Ang Tijd ay widget na nagpapakita ng oras sa mga salita sa home screen ng Android. May 91 pagpipilian ng wika, sistema ng pagsulat, at panrehiyong anyo. Maaaring baguhin nang hiwalay ang estilo ng bawat widget.
+
+• Compact na layout o isang linya.
+• Mga font, 40 kulay, at naaayos na transparency ng panel.
+• Live na preview at mga naka-save na estilo.
+• I-tap para buksan ang app ng orasan.
+
+Hindi kailangan ng internet. Walang ad, account, o pangongolekta ng data.
+
+Magdagdag ng widget mula sa Tijd o sa pagpili ng widget sa home screen. Payagan ang Mga alarm at paalala para mag-update bawat minuto. Maaaring pansamantalang huminto ang pag-update habang natutulog ang telepono. Kailangan ng Android 12 o mas bago para sa ilang setting ng hitsura.

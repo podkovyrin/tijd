@@ -1,0 +1,12 @@
+Un rellotge en el teu idioma i al teu gust.
+
+Tijd mostra l’hora en paraules a la pantalla d’inici d’Android. Tria entre 91 opcions d’idioma, escriptura i regió. Personalitza cada giny per separat.
+
+• Rellotge de text compacte o d’una sola línia.
+• Tipus de lletra, 40 colors i transparència del fons ajustable.
+• Previsualització en directe i estils desats.
+• Toca el giny per obrir l’aplicació de rellotge.
+
+No cal connexió a Internet. Sense anuncis, comptes ni recollida de dades.
+
+Afegeix un giny des de Tijd o del selector de ginys de la pantalla d’inici. Permet les alarmes i els recordatoris per actualitzar-lo cada minut. Les actualitzacions es poden aturar mentre el telèfon està en repòs. Algunes opcions d’aparença requereixen Android 12 o posterior.

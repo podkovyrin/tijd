@@ -1,0 +1,12 @@
+Ura v vašem jeziku in slogu.
+
+Tijd prikazuje čas z besedami na začetnem zaslonu Androida. Izbirajte med 91 jezikovnimi, pisnimi in regionalnimi različicami. Vsak pripomoček prilagodite posebej.
+
+• Kompaktna besedilna ura ali čas v eni vrstici.
+• Pisave, 40 barv in nastavljiva prosojnost ozadja.
+• Sprotni predogled in shranjeni slogi.
+• Z dotikom odprete aplikacijo za uro.
+
+Deluje brez interneta. Brez oglasov, računov in zbiranja podatkov.
+
+Dodajte pripomoček iz aplikacije Tijd ali iz izbirnika pripomočkov na začetnem zaslonu. Dovolite alarme in opomnike za posodabljanje vsako minuto. Posodobitve se lahko ustavijo, ko telefon spi. Nekatere možnosti videza zahtevajo Android 12 ali novejši.

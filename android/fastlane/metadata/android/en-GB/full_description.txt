@@ -1,0 +1,12 @@
+A clock that fits the way you read time.
+
+Tijd is a clock widget that shows time in words on your Android home screen. Choose from 91 language, script and regional options. Style each widget independently.
+
+• Compact or single-row text clock.
+• Fonts, 40 colors and adjustable background transparency.
+• Live preview and saved styles.
+• Tap to open your clock app.
+
+No internet connection needed. No ads, accounts or data collection.
+
+Add a widget from Tijd or your home screen’s widget picker. Allow Alarms & reminders to update the clock every minute. Updates may pause while your phone sleeps. Some appearance options require Android 12 or newer.

@@ -1,0 +1,12 @@
+Kendi dilinizde, kendi tarzınızda bir saat.
+
+Tijd, Android ana ekranınızda saati yazıyla gösterir. Dil, yazı sistemi ve bölgeye göre 91 seçenek arasından seçim yapın. Her widget’ı ayrı ayrı özelleştirin.
+
+• Kompakt veya tek satırlık metin saati.
+• Yazı tipleri, 40 renk ve ayarlanabilir arka plan saydamlığı.
+• Canlı önizleme ve kaydedilen stiller.
+• Saat uygulamanızı açmak için dokunun.
+
+İnternet gerekmez. Reklam, hesap veya veri toplama yoktur.
+
+Tijd’den veya ana ekranın widget seçicisinden widget ekleyin. Saatin her dakika güncellenmesi için alarmlara ve hatırlatıcılara izin verin. Telefon uyku modundayken güncellemeler duraklayabilir. Bazı görünüm seçenekleri Android 12 veya daha yeni bir sürüm gerektirir.

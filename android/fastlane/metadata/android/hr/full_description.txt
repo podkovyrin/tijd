@@ -1,0 +1,12 @@
+Sat na vašem jeziku i u vašem stilu.
+
+Tijd prikazuje vrijeme riječima na početnom zaslonu Androida. Birajte između 91 jezične, pismovne i regionalne inačice. Svaki widget prilagodite zasebno.
+
+• Kompaktni tekstni sat ili vrijeme u jednom retku.
+• Fontovi, 40 boja i podesiva prozirnost pozadine.
+• Pretpregled uživo i spremljeni stilovi.
+• Dodirom otvarate aplikaciju za sat.
+
+Radi bez interneta. Bez oglasa, računa i prikupljanja podataka.
+
+Dodajte widget iz aplikacije Tijd ili putem izbornika widgeta na početnom zaslonu. Dopustite alarme i podsjetnike za ažuriranje svake minute. Ažuriranja se mogu zaustaviti dok telefon miruje. Neke postavke izgleda zahtijevaju Android 12 ili noviji.

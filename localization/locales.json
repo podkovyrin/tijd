@@ -1,0 +1,730 @@
+[
+  {
+    "time_code": "af",
+    "name": "Afrikaans",
+    "app_locale": "af",
+    "resource_directory": "values-af",
+    "play_locale": "af",
+    "note": ""
+  },
+  {
+    "time_code": "sq",
+    "name": "Albanian",
+    "app_locale": "sq",
+    "resource_directory": "values-sq",
+    "play_locale": "sq",
+    "note": ""
+  },
+  {
+    "time_code": "am",
+    "name": "Amharic",
+    "app_locale": "am",
+    "resource_directory": "values-am",
+    "play_locale": "am",
+    "note": ""
+  },
+  {
+    "time_code": "ar",
+    "name": "Arabic",
+    "app_locale": "ar",
+    "resource_directory": "values-ar",
+    "play_locale": "ar",
+    "note": ""
+  },
+  {
+    "time_code": "hy",
+    "name": "Armenian",
+    "app_locale": "hy",
+    "resource_directory": "values-hy",
+    "play_locale": "hy-AM",
+    "note": ""
+  },
+  {
+    "time_code": "az",
+    "name": "Azerbaijani",
+    "app_locale": "az",
+    "resource_directory": "values-az",
+    "play_locale": "az-AZ",
+    "note": ""
+  },
+  {
+    "time_code": "eu",
+    "name": "Basque",
+    "app_locale": "eu",
+    "resource_directory": "values-eu",
+    "play_locale": "eu-ES",
+    "note": ""
+  },
+  {
+    "time_code": "bn",
+    "name": "Bengali",
+    "app_locale": "bn",
+    "resource_directory": "values-bn",
+    "play_locale": "bn-BD",
+    "note": ""
+  },
+  {
+    "time_code": "pt-BR",
+    "name": "Brazilian Portuguese",
+    "app_locale": "pt-BR",
+    "resource_directory": "values-b+pt+BR",
+    "play_locale": "pt-BR",
+    "note": ""
+  },
+  {
+    "time_code": "br",
+    "name": "Breton",
+    "app_locale": "br",
+    "resource_directory": "values-br",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "bg",
+    "name": "Bulgarian",
+    "app_locale": "bg",
+    "resource_directory": "values-bg",
+    "play_locale": "bg",
+    "note": ""
+  },
+  {
+    "time_code": "my",
+    "name": "Burmese",
+    "app_locale": "my",
+    "resource_directory": "values-my",
+    "play_locale": "my-MM",
+    "note": ""
+  },
+  {
+    "time_code": "yue",
+    "name": "Cantonese",
+    "app_locale": "yue",
+    "resource_directory": "values-b+yue",
+    "play_locale": null,
+    "note": "Cantonese app translation; Play has no Cantonese locale. Traditional Chinese listing is available as zh-TW; zh-HK is a regional Chinese locale, not a Cantonese language code."
+  },
+  {
+    "time_code": "ca",
+    "name": "Catalan",
+    "app_locale": "ca",
+    "resource_directory": "values-ca",
+    "play_locale": "ca",
+    "note": ""
+  },
+  {
+    "time_code": "ceb",
+    "name": "Cebuano",
+    "app_locale": "ceb",
+    "resource_directory": "values-b+ceb",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "cs",
+    "name": "Czech",
+    "app_locale": "cs",
+    "resource_directory": "values-cs",
+    "play_locale": "cs-CZ",
+    "note": ""
+  },
+  {
+    "time_code": "da",
+    "name": "Danish",
+    "app_locale": "da",
+    "resource_directory": "values-da",
+    "play_locale": "da-DK",
+    "note": ""
+  },
+  {
+    "time_code": "nl",
+    "name": "Dutch",
+    "app_locale": "nl",
+    "resource_directory": "values-nl",
+    "play_locale": "nl-NL",
+    "note": ""
+  },
+  {
+    "time_code": "arz",
+    "name": "Egyptian Arabic",
+    "app_locale": "ar",
+    "resource_directory": "values-ar",
+    "play_locale": "ar",
+    "note": "Standard Arabic interface and store listing; the widget keeps its dialect."
+  },
+  {
+    "time_code": "en",
+    "name": "English",
+    "app_locale": "en",
+    "resource_directory": "values",
+    "play_locale": "en-US",
+    "note": ""
+  },
+  {
+    "time_code": "et",
+    "name": "Estonian",
+    "app_locale": "et",
+    "resource_directory": "values-et",
+    "play_locale": "et",
+    "note": ""
+  },
+  {
+    "time_code": "pt-PT",
+    "name": "European Portuguese",
+    "app_locale": "pt-PT",
+    "resource_directory": "values-b+pt+PT",
+    "play_locale": "pt-PT",
+    "note": ""
+  },
+  {
+    "time_code": "fil",
+    "name": "Filipino",
+    "app_locale": "fil",
+    "resource_directory": "values-b+fil",
+    "play_locale": "fil",
+    "note": ""
+  },
+  {
+    "time_code": "fi",
+    "name": "Finnish",
+    "app_locale": "fi",
+    "resource_directory": "values-fi",
+    "play_locale": "fi-FI",
+    "note": ""
+  },
+  {
+    "time_code": "fr",
+    "name": "French",
+    "app_locale": "fr",
+    "resource_directory": "values-fr",
+    "play_locale": "fr-FR",
+    "note": ""
+  },
+  {
+    "time_code": "ka",
+    "name": "Georgian",
+    "app_locale": "ka",
+    "resource_directory": "values-ka",
+    "play_locale": "ka-GE",
+    "note": ""
+  },
+  {
+    "time_code": "de",
+    "name": "German",
+    "app_locale": "de",
+    "resource_directory": "values-de",
+    "play_locale": "de-DE",
+    "note": ""
+  },
+  {
+    "time_code": "el",
+    "name": "Greek",
+    "app_locale": "el",
+    "resource_directory": "values-el",
+    "play_locale": "el-GR",
+    "note": ""
+  },
+  {
+    "time_code": "gu",
+    "name": "Gujarati",
+    "app_locale": "gu",
+    "resource_directory": "values-gu",
+    "play_locale": "gu",
+    "note": ""
+  },
+  {
+    "time_code": "ha",
+    "name": "Hausa",
+    "app_locale": "ha",
+    "resource_directory": "values-ha",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "he",
+    "name": "Hebrew",
+    "app_locale": "he",
+    "resource_directory": "values-iw",
+    "play_locale": "iw-IL",
+    "note": ""
+  },
+  {
+    "time_code": "hi",
+    "name": "Hindi",
+    "app_locale": "hi",
+    "resource_directory": "values-hi",
+    "play_locale": "hi-IN",
+    "note": ""
+  },
+  {
+    "time_code": "hu",
+    "name": "Hungarian",
+    "app_locale": "hu",
+    "resource_directory": "values-hu",
+    "play_locale": "hu-HU",
+    "note": ""
+  },
+  {
+    "time_code": "is",
+    "name": "Icelandic",
+    "app_locale": "is",
+    "resource_directory": "values-is",
+    "play_locale": "is-IS",
+    "note": ""
+  },
+  {
+    "time_code": "ig",
+    "name": "Igbo",
+    "app_locale": "ig",
+    "resource_directory": "values-ig",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "id",
+    "name": "Indonesian",
+    "app_locale": "id",
+    "resource_directory": "values-in",
+    "play_locale": "id",
+    "note": ""
+  },
+  {
+    "time_code": "ga",
+    "name": "Irish",
+    "app_locale": "ga",
+    "resource_directory": "values-ga",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "it",
+    "name": "Italian",
+    "app_locale": "it",
+    "resource_directory": "values-it",
+    "play_locale": "it-IT",
+    "note": ""
+  },
+  {
+    "time_code": "ja",
+    "name": "Japanese",
+    "app_locale": "ja",
+    "resource_directory": "values-ja",
+    "play_locale": "ja-JP",
+    "note": ""
+  },
+  {
+    "time_code": "jv",
+    "name": "Javanese",
+    "app_locale": "jv",
+    "resource_directory": "values-jv",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "kn",
+    "name": "Kannada",
+    "app_locale": "kn",
+    "resource_directory": "values-kn",
+    "play_locale": "kn-IN",
+    "note": ""
+  },
+  {
+    "time_code": "kk",
+    "name": "Kazakh",
+    "app_locale": "kk",
+    "resource_directory": "values-kk",
+    "play_locale": "kk",
+    "note": ""
+  },
+  {
+    "time_code": "km",
+    "name": "Khmer",
+    "app_locale": "km",
+    "resource_directory": "values-km",
+    "play_locale": "km-KH",
+    "note": ""
+  },
+  {
+    "time_code": "ko",
+    "name": "Korean",
+    "app_locale": "ko",
+    "resource_directory": "values-ko",
+    "play_locale": "ko-KR",
+    "note": ""
+  },
+  {
+    "time_code": "ku",
+    "name": "Kurmanji Kurdish",
+    "app_locale": "ku",
+    "resource_directory": "values-ku",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "lo",
+    "name": "Lao",
+    "app_locale": "lo",
+    "resource_directory": "values-lo",
+    "play_locale": "lo-LA",
+    "note": ""
+  },
+  {
+    "time_code": "lv",
+    "name": "Latvian",
+    "app_locale": "lv",
+    "resource_directory": "values-lv",
+    "play_locale": "lv",
+    "note": ""
+  },
+  {
+    "time_code": "apc",
+    "name": "Levantine Arabic",
+    "app_locale": "ar",
+    "resource_directory": "values-ar",
+    "play_locale": "ar",
+    "note": "Standard Arabic interface and store listing; the widget keeps its dialect."
+  },
+  {
+    "time_code": "lt",
+    "name": "Lithuanian",
+    "app_locale": "lt",
+    "resource_directory": "values-lt",
+    "play_locale": "lt",
+    "note": ""
+  },
+  {
+    "time_code": "ms",
+    "name": "Malay",
+    "app_locale": "ms",
+    "resource_directory": "values-ms",
+    "play_locale": "ms",
+    "note": ""
+  },
+  {
+    "time_code": "ml",
+    "name": "Malayalam",
+    "app_locale": "ml",
+    "resource_directory": "values-ml",
+    "play_locale": "ml-IN",
+    "note": ""
+  },
+  {
+    "time_code": "mt",
+    "name": "Maltese",
+    "app_locale": "mt",
+    "resource_directory": "values-mt",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "zh-Hans",
+    "name": "Mandarin Chinese (Simplified)",
+    "app_locale": "zh-Hans",
+    "resource_directory": "values-b+zh+Hans",
+    "play_locale": "zh-CN",
+    "note": ""
+  },
+  {
+    "time_code": "zh-Hant",
+    "name": "Mandarin Chinese (Traditional)",
+    "app_locale": "zh-Hant",
+    "resource_directory": "values-b+zh+Hant",
+    "play_locale": "zh-TW",
+    "note": ""
+  },
+  {
+    "time_code": "mr",
+    "name": "Marathi",
+    "app_locale": "mr",
+    "resource_directory": "values-mr",
+    "play_locale": "mr-IN",
+    "note": ""
+  },
+  {
+    "time_code": "ne",
+    "name": "Nepali",
+    "app_locale": "ne",
+    "resource_directory": "values-ne",
+    "play_locale": "ne-NP",
+    "note": ""
+  },
+  {
+    "time_code": "nb",
+    "name": "Norwegian",
+    "app_locale": "nb",
+    "resource_directory": "values-nb",
+    "play_locale": "no-NO",
+    "note": ""
+  },
+  {
+    "time_code": "or",
+    "name": "Odia",
+    "app_locale": "or",
+    "resource_directory": "values-or",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "om",
+    "name": "Oromo",
+    "app_locale": "om",
+    "resource_directory": "values-om",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "ps",
+    "name": "Pashto",
+    "app_locale": "ps",
+    "resource_directory": "values-ps",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "fa",
+    "name": "Persian",
+    "app_locale": "fa",
+    "resource_directory": "values-fa",
+    "play_locale": "fa",
+    "note": ""
+  },
+  {
+    "time_code": "pl",
+    "name": "Polish",
+    "app_locale": "pl",
+    "resource_directory": "values-pl",
+    "play_locale": "pl-PL",
+    "note": ""
+  },
+  {
+    "time_code": "pt",
+    "name": "Portuguese",
+    "app_locale": "pt-PT",
+    "resource_directory": "values-b+pt+PT",
+    "play_locale": "pt-PT",
+    "note": "Shares European Portuguese UI and listing."
+  },
+  {
+    "time_code": "pa-Guru",
+    "name": "Punjabi (Gurmukhi)",
+    "app_locale": "pa-Guru",
+    "resource_directory": "values-b+pa+Guru",
+    "play_locale": "pa",
+    "note": ""
+  },
+  {
+    "time_code": "pa-Arab",
+    "name": "Punjabi (Shahmukhi)",
+    "app_locale": "pa-Arab",
+    "resource_directory": "values-b+pa+Arab",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "ro",
+    "name": "Romanian",
+    "app_locale": "ro",
+    "resource_directory": "values-ro",
+    "play_locale": "ro",
+    "note": ""
+  },
+  {
+    "time_code": "ru",
+    "name": "Russian",
+    "app_locale": "ru",
+    "resource_directory": "values-ru",
+    "play_locale": "ru-RU",
+    "note": ""
+  },
+  {
+    "time_code": "gd",
+    "name": "Scottish Gaelic",
+    "app_locale": "gd",
+    "resource_directory": "values-gd",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "sh",
+    "name": "Serbo Croatian",
+    "app_locale": "hr",
+    "resource_directory": "values-hr",
+    "play_locale": "hr",
+    "note": "Shared native time option; Croatian, Bosnian and Serbian UI resources are supplied separately."
+  },
+  {
+    "time_code": "sd",
+    "name": "Sindhi",
+    "app_locale": "sd",
+    "resource_directory": "values-sd",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "si",
+    "name": "Sinhala",
+    "app_locale": "si",
+    "resource_directory": "values-si",
+    "play_locale": "si-LK",
+    "note": ""
+  },
+  {
+    "time_code": "sk",
+    "name": "Slovak",
+    "app_locale": "sk",
+    "resource_directory": "values-sk",
+    "play_locale": "sk",
+    "note": ""
+  },
+  {
+    "time_code": "sl",
+    "name": "Slovenian",
+    "app_locale": "sl",
+    "resource_directory": "values-sl",
+    "play_locale": "sl",
+    "note": ""
+  },
+  {
+    "time_code": "so",
+    "name": "Somali",
+    "app_locale": "so",
+    "resource_directory": "values-so",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "ckb",
+    "name": "Sorani Kurdish",
+    "app_locale": "ckb",
+    "resource_directory": "values-b+ckb",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "es",
+    "name": "Spanish",
+    "app_locale": "es",
+    "resource_directory": "values-es",
+    "play_locale": "es-ES",
+    "note": ""
+  },
+  {
+    "time_code": "su",
+    "name": "Sundanese",
+    "app_locale": "su",
+    "resource_directory": "values-su",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "sw",
+    "name": "Swahili",
+    "app_locale": "sw",
+    "resource_directory": "values-sw",
+    "play_locale": "sw",
+    "note": ""
+  },
+  {
+    "time_code": "sv",
+    "name": "Swedish",
+    "app_locale": "sv",
+    "resource_directory": "values-sv",
+    "play_locale": "sv-SE",
+    "note": ""
+  },
+  {
+    "time_code": "ta",
+    "name": "Tamil",
+    "app_locale": "ta",
+    "resource_directory": "values-ta",
+    "play_locale": "ta-IN",
+    "note": ""
+  },
+  {
+    "time_code": "te",
+    "name": "Telugu",
+    "app_locale": "te",
+    "resource_directory": "values-te",
+    "play_locale": "te-IN",
+    "note": ""
+  },
+  {
+    "time_code": "th",
+    "name": "Thai",
+    "app_locale": "th",
+    "resource_directory": "values-th",
+    "play_locale": "th",
+    "note": ""
+  },
+  {
+    "time_code": "tr",
+    "name": "Turkish",
+    "app_locale": "tr",
+    "resource_directory": "values-tr",
+    "play_locale": "tr-TR",
+    "note": ""
+  },
+  {
+    "time_code": "uk",
+    "name": "Ukrainian",
+    "app_locale": "uk",
+    "resource_directory": "values-uk",
+    "play_locale": "uk",
+    "note": ""
+  },
+  {
+    "time_code": "ur",
+    "name": "Urdu",
+    "app_locale": "ur",
+    "resource_directory": "values-ur",
+    "play_locale": "ur",
+    "note": ""
+  },
+  {
+    "time_code": "uz",
+    "name": "Uzbek",
+    "app_locale": "uz",
+    "resource_directory": "values-uz",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "vi",
+    "name": "Vietnamese",
+    "app_locale": "vi",
+    "resource_directory": "values-vi",
+    "play_locale": "vi",
+    "note": ""
+  },
+  {
+    "time_code": "cy",
+    "name": "Welsh",
+    "app_locale": "cy",
+    "resource_directory": "values-cy",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "yi",
+    "name": "Yiddish",
+    "app_locale": "yi",
+    "resource_directory": "values-ji",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "yo",
+    "name": "Yoruba",
+    "app_locale": "yo",
+    "resource_directory": "values-yo",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  },
+  {
+    "time_code": "zu",
+    "name": "Zulu",
+    "app_locale": "zu",
+    "resource_directory": "values-zu",
+    "play_locale": null,
+    "note": "No matching Google Play listing locale; Play falls back to the default listing or offers automatic translation."
+  }
+]

@@ -1,50 +1,36 @@
-# Google Play listing draft
+# Google Play listing — English source
 
-Status: prepared locally; not submitted. Confirm contact details, category, countries,
+Status: prepared locally; not submitted. Upload text lives in
+`android/fastlane/metadata/android/en-US/`. See [ASO rationale](store-aso.md)
+and [localization and publishing](localization.md). Confirm contact details, category, countries,
 pricing, and target audience in Play Console before submission.
 
 ## App name
 
-Tijd: Time in Words
-
-Installed app / launcher name: Tijd.
+Tijd: Word Clock Widget
 
 ## Short description
 
-A little less digital. A clock widget that tells time in words.
+Time in words on your home screen. Choose your language and style.
 
 ## Full description
 
-A little less digital. A little more human.
+A clock that fits the way you read time.
 
-Tijd brings time in words to your Android home screen. Choose a language and make
-each clock your own, with a quiet design that fits your wallpaper.
+Tijd is a clock widget that shows time in words on your Android home screen. Choose from 91 language, script and regional options. Style each widget independently.
 
-• Choose from 91 language, script, and regional options.
-• Use a compact layout with wrapping words or a wide, single-row clock.
-• Personalize each widget with fonts, 40 curated colors, text size, and alignment.
-• Keep the background transparent or add a translucent panel.
-• Preview your changes and edit installed widgets from My widgets.
-• Save a favorite style as the starting point for future widgets.
-• Tap a widget to open your clock app.
+• Compact or single-row text clock.
+• Fonts, 40 colors and adjustable background transparency.
+• Live preview and saved styles.
+• Tap to open your clock app.
 
-Tijd works offline, with no ads, accounts, or data collection.
+No internet connection needed. No ads, accounts or data collection.
 
-GETTING STARTED
-Open Tijd, allow Alarms & reminders for minute updates, then add a widget to your
-home screen. You can also add Tijd from your launcher's widget picker.
-
-Requires Android 6.0 or newer. Automatic wallpaper-aware text color and rounded
-panels require Android 12 or newer. Updates may pause while your phone sleeps to
-save battery. Widget placement and resizing depend on your launcher.
-
-The widget supports multiple languages; the app's settings interface is currently
-in English.
+Add a widget from Tijd or your home screen’s widget picker. Allow Alarms & reminders to update the clock every minute. Updates may pause while your phone sleeps. Some appearance options require Android 12 or newer.
 
 ## Initial release notes
 
-Meet Tijd: time, in words. Add a compact or single-row clock, choose your language,
-and personalize each widget with fonts, colors, and translucent panels.
+Time in words on your home screen. Choose your language and style.
 
 ## Listing fields to complete
 

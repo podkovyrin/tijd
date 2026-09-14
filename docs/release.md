@@ -8,7 +8,7 @@ state has not been inspected and nothing has been submitted or published.
 
 | Field | Value |
 | --- | --- |
-| Google Play title | Tijd: Time in Words |
+| Google Play title | Tijd: Word Clock Widget |
 | Installed app name | Tijd |
 | Single-row widget label | Tijd — Single row |
 | Application ID | `nl.nederlandstijd.widget` |
@@ -48,10 +48,10 @@ an uploaded code. See [Google's app setup guidance](https://support.google.com/g
   and production; internal-only testing is exempt from the form. See
   [Data safety](https://support.google.com/googleplay/android-developer/answer/10787469)
   and [Google's privacy-policy guidance](https://support.google.com/googleplay/android-developer/thread/307687762/tips-and-best-practices-for-complying-with-privacy-policy-requirements?hl=en).
-- [ ] **Set up release signing.** Create and securely back up an upload key, add a
-  private signing configuration, and build a signed Android App Bundle. Keep
+- [ ] **Set up release signing.** Create and securely back up an upload key, configure the
+  [signing environment variables](localization.md), and build a signed Android App Bundle. Keep
   passwords and keys outside tracked files; ignore patterns already exist. Enroll
-  in Play App Signing when uploading. The current `bundleRelease` output is
+  in Play App Signing when uploading. Without signing credentials, `bundleRelease` output is
   unsigned and cannot be used as the submission artifact. See
   [Android signing guidance](https://developer.android.com/studio/publish/app-signing).
 - [ ] **Run release-candidate QA.** Use the matrix below, fix findings, and record
@@ -92,7 +92,7 @@ an uploaded code. See [Google's app setup guidance](https://support.google.com/g
 
 - `mise exec -- ./android/gradlew -p android testDebugUnitTest lintRelease bundleRelease`
   succeeds. The unit suite contains **one scheduler test**; it passes. Release lint
-  reports **0 errors and 23 warnings**. Warnings cover newer-API widget attributes,
+  reports **0 errors and 27 warnings**. Warnings cover newer-API widget attributes,
   dependency updates, compatibility/style suggestions, and a splash-screen
   heuristic on the clock-launch forwarding activity. Review older-device rendering
   and clock launch during QA; dependency upgrades are not automatically release blockers.
@@ -100,8 +100,8 @@ an uploaded code. See [Google's app setup guidance](https://support.google.com/g
   or storage permission. App permissions are `SCHEDULE_EXACT_ALARM` and
   `RECEIVE_BOOT_COMPLETED`, plus AndroidX's signature-protected internal receiver
   permission. Backup and device transfer are excluded by the current configuration.
-- There is no release signing configuration in `android/app/build.gradle.kts`.
-  `jarsigner -verify` reports that `app-release.aab` is unsigned.
+- Environment-based upload signing is now configured in `android/app/build.gradle.kts`.
+  Builds remain unsigned without signing secrets; see [publishing setup](localization.md).
 - The bundle includes `arm64-v8a`, `armeabi-v7a`, `x86`, and `x86_64` native builds.
   `llvm-objdump -p` confirms all LOAD segments of the arm64 and x86_64 libraries
   have `2**14` (16 KB) alignment. AGP 9.4 and NDK r28 meet Android's recommended
@@ -111,8 +111,11 @@ an uploaded code. See [Google's app setup guidance](https://support.google.com/g
 - The configured target SDK 37 exceeds Google's current new-phone-app minimum
   of API 36 effective 31 August 2026. Confirm Console acceptance of the final
   artifact. See [target API requirements](https://support.google.com/googleplay/android-developer/answer/11926878?hl=en).
-- Instrumentation tests exist for rendering, editing, persistence, recovery, and
-  lifecycle behavior, but were **not run in this review**. The C++ project has no
+- Three localization instrumentation tests pass on a Pixel 10 Pro XL / Android 17,
+  covering all 91 configured UI locales, formatting, script variants, a Portuguese
+  regional fallback, localized language names and expanding buttons at 200% text.
+  The broader rendering, editing, persistence, recovery and lifecycle suites
+  were **not run in this localization review**. The C++ project has no
   standalone automated language-correctness test suite. Native-speaker validation
   remains necessary before treating all 91 variants as linguistically verified.
 - Both widget providers have `previewLayout` but no legacy `previewImage`.

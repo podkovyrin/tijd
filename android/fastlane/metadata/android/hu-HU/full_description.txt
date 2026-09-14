@@ -1,0 +1,12 @@
+Óra a saját nyelveden és stílusodban.
+
+A Tijd szavakkal mutatja az időt az Android kezdőképernyőjén. Válassz 91 nyelvi, írásrendszeri és regionális változat közül. Minden widget külön testreszabható.
+
+• Kompakt szöveges óra vagy egysoros elrendezés.
+• Betűtípusok, 40 szín és állítható háttér-átlátszóság.
+• Élő előnézet és mentett stílusok.
+• Koppintással megnyithatod az óraalkalmazásodat.
+
+Internet nélkül működik. Nincsenek hirdetések, fiókok vagy adatgyűjtés.
+
+Adj hozzá widgetet a Tijdből vagy a kezdőképernyő widgetválasztójából. Engedélyezd az ébresztéseket és emlékeztetőket a percenkénti frissítéshez. A frissítések szünetelhetnek, amíg a telefon alvó állapotban van. Néhány megjelenési beállításhoz Android 12 vagy újabb szükséges.

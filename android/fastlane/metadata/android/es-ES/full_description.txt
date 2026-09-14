@@ -1,0 +1,12 @@
+Un reloj en tu idioma y a tu gusto.
+
+Tijd muestra la hora en palabras en la pantalla de inicio de Android. Elige entre 91 opciones de idioma, escritura y región. Personaliza cada widget por separado.
+
+• Reloj de texto compacto o de una sola línea.
+• Fuentes, 40 colores y transparencia del fondo ajustable.
+• Vista previa en directo y estilos guardados.
+• Toca el widget para abrir tu aplicación de reloj.
+
+Sin conexión a Internet, anuncios, cuentas ni recopilación de datos.
+
+Añade un widget desde Tijd o el selector de widgets de la pantalla de inicio. Permite las alarmas y los recordatorios para actualizarlo cada minuto. Las actualizaciones pueden pausarse mientras el teléfono está en reposo. Algunas opciones de apariencia requieren Android 12 o posterior.

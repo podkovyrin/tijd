@@ -26,9 +26,18 @@ internal object LanguagePicker {
         String(Character.toChars(0x1F1E6 + it.code - 'A'.code))
     }?.joinToString("") ?: "🌐"
 
-    fun displayName(code: String): String {
+    fun displayName(code: String, locale: Locale = Locale.getDefault()): String {
         val language = SpokenTime.languages.first { it.code == code }
-        return "${flag(code)}  ${language.name}"
+        val localized = Locale.forLanguageTag(code).getDisplayName(locale)
+            .takeUnless { it == code || it == Locale.forLanguageTag(code).language } ?: language.name
+        return "${flag(code)}  $localized"
+    }
+
+    fun displayName(context: Context, code: String): String {
+        val config = context.resources.configuration
+        @Suppress("DEPRECATION")
+        val locale = if (android.os.Build.VERSION.SDK_INT >= 24) config.locales[0] else config.locale
+        return displayName(code, locale)
     }
 
     private fun nativeName(language: SpokenTime.Language): String {
@@ -57,12 +66,12 @@ internal object LanguagePicker {
         list.adapter = adapter
         fun filter(query: String) {
             filtered = SpokenTime.languages.filter {
-                "${it.name} ${nativeName(it)} ${it.code}".contains(query.trim(), ignoreCase = true)
+                "${it.name} ${displayName(context, it.code)} ${nativeName(it)} ${it.code}".contains(query.trim(), ignoreCase = true)
             }
             adapter.clear()
             adapter.addAll(filtered.map {
                 val native = nativeName(it)
-                displayName(it.code) + if (native.isNotBlank() && !it.name.equals(native, true)) " · $native" else ""
+                displayName(context, it.code) + if (native.isNotBlank() && !it.name.equals(native, true)) " · $native" else ""
             })
             list.clearChoices()
             val index = filtered.indexOfFirst { it.code == selected }

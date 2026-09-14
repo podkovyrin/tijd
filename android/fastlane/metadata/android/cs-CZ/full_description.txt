@@ -1,0 +1,12 @@
+Hodiny ve vašem jazyce a stylu.
+
+Tijd zobrazuje čas slovy na domovské obrazovce Androidu. Vyberte si z 91 jazykových, písmových a regionálních variant. Každý widget si upravíte zvlášť.
+
+• Kompaktní textové hodiny nebo čas na jednom řádku.
+• Písma, 40 barev a nastavitelná průhlednost pozadí.
+• Živý náhled a uložené styly.
+• Klepnutím otevřete aplikaci hodin.
+
+Funguje bez internetu. Bez reklam, účtů a shromažďování dat.
+
+Přidejte widget z Tijd nebo z nabídky widgetů domovské obrazovky. Povolte budíky a připomenutí pro aktualizaci každou minutu. Během spánku telefonu se aktualizace mohou pozastavit. Některé možnosti vzhledu vyžadují Android 12 nebo novější.

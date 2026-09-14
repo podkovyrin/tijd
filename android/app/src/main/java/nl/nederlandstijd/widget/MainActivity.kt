@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
             val style = WidgetStyleStore(this).read(id)
             val card = widgetList.card()
             card.label(type, heading = true).apply { setPadding(0, dp(4), 0, dp(4)); textSize = 20f }
-            card.label(LanguagePicker.displayName(style.languageCode))
+            card.label(LanguagePicker.displayName(this, style.languageCode))
             val preview = WidgetPreview(this, activityScope)
             card.addView(preview, LinearLayout.LayoutParams(-1, dp(156)))
             preview.show(style, manager.getAppWidgetOptions(id), row)
@@ -149,7 +149,7 @@ class MainActivity : AppCompatActivity() {
             target.descendantFocusability = android.view.ViewGroup.FOCUS_BLOCK_DESCENDANTS
             card.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
             target.contentDescription = getString(
-                R.string.widget_edit_accessibility, id, type, LanguagePicker.displayName(style.languageCode),
+                R.string.widget_edit_accessibility, id, type, LanguagePicker.displayName(this, style.languageCode),
             )
             target.setOnClickListener {
                 startActivity(Intent(this, WidgetConfigurationActivity::class.java)

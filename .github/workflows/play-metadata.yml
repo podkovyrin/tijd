@@ -1,0 +1,59 @@
+name: Google Play metadata
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Validate against Play or upload text for later Console review
+        type: choice
+        options: [validate_metadata, upload_metadata]
+        default: validate_metadata
+permissions:
+  contents: read
+concurrency:
+  group: google-play-edits
+  cancel-in-progress: false
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+    environment: google-play
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+          working-directory: android
+      - name: Validate local files
+        run: bundle exec fastlane android check
+        working-directory: android
+      - name: Prepare credentials
+        env:
+          PLAY_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          data = os.environ['PLAY_CREDENTIALS']
+          json.loads(data)
+          path = Path(os.environ['RUNNER_TEMP']) / 'play-credentials.json'
+          path.touch(mode=0o600)
+          path.write_text(data)
+          PY
+      - name: Run selected metadata operation
+        working-directory: android
+        env:
+          PLAY_OPERATION: ${{ inputs.operation }}
+          GOOGLE_PLAY_JSON_KEY: ${{ runner.temp }}/play-credentials.json
+          FASTLANE_SKIP_UPDATE_CHECK: '1'
+          FASTLANE_OPT_OUT_USAGE: '1'
+        run: |
+          case "$PLAY_OPERATION" in
+            validate_metadata|upload_metadata) bundle exec fastlane android "$PLAY_OPERATION" ;;
+            *) exit 2 ;;
+          esac
+      - name: Remove temporary credentials
+        if: always()
+        run: rm -f "$RUNNER_TEMP/play-credentials.json"

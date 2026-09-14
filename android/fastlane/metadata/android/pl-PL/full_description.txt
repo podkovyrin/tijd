@@ -1,0 +1,12 @@
+Zegar w Twoim języku i stylu.
+
+Tijd wyświetla godzinę słownie na ekranie głównym Androida. Wybierz spośród 91 wariantów języka, pisma i regionu. Dostosuj każdy widżet osobno.
+
+• Kompaktowy zegar tekstowy lub jeden wiersz.
+• Czcionki, 40 kolorów i regulowana przezroczystość tła.
+• Podgląd na żywo i zapisane style.
+• Dotknij widżetu, aby otworzyć aplikację zegara.
+
+Działa bez internetu. Bez reklam, kont i zbierania danych.
+
+Dodaj widżet z Tijd lub z menu widżetów ekranu głównego. Zezwól na alarmy i przypomnienia, aby zegar aktualizował się co minutę. Aktualizacje mogą być wstrzymywane podczas uśpienia telefonu. Niektóre ustawienia wyglądu wymagają Androida 12 lub nowszego.

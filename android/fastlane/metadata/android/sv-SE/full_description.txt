@@ -1,0 +1,12 @@
+En klocka på ditt språk och i din stil.
+
+Tijd visar klockan med ord på din Android-startskärm. Välj bland 91 språk-, skrift- och regionvarianter. Anpassa varje widget separat.
+
+• Kompakt textklocka eller klockan på en enda rad.
+• Typsnitt, 40 färger och justerbar bakgrundsgenomskinlighet.
+• Direkt förhandsvisning och sparade stilar.
+• Tryck för att öppna din klockapp.
+
+Kräver ingen internetanslutning. Ingen reklam, inga konton och ingen datainsamling.
+
+Lägg till en widget från Tijd eller via startskärmens widgetväljare. Tillåt alarm och påminnelser för att uppdatera klockan varje minut. Uppdateringar kan pausas när telefonen är i viloläge. Vissa utseendealternativ kräver Android 12 eller senare.

@@ -4,18 +4,18 @@
     <string name="license_acknowledgments">License and acknowledgments</string>
     <string name="full_license">Full license</string>
     <string name="app_name" translatable="false">Tijd</string>
-    <string name="widget_description">The time in spoken words</string>
-    <string name="preview_time">vijf voor half negen</string>
-    <string name="setup_description">A little less digital. A little more human.</string>
-    <string name="permission_description">Allow alarms and reminders to keep your clock in step with every minute.</string>
-    <string name="permission_granted">Minute updates are on</string>
+    <string name="widget_description">Time in words</string>
+    <string name="preview_time" translatable="false">vijf voor half negen</string>
+    <string name="setup_description">A clock that fits the way you read time.</string>
+    <string name="permission_description">Allow alarms and reminders to update your clock every minute.</string>
+    <string name="permission_granted">Your clock updates every minute</string>
     <string name="permission_missing">Keep your clock on time</string>
-    <string name="allow_updates">Allow minute updates</string>
+    <string name="allow_updates">Update every minute</string>
     <string name="add_widget">Add widget</string>
     <string name="add_widget_manually">To add the widget, touch and hold your home screen and choose Widgets, then Tijd.</string>
     <string name="permission_settings_unavailable">Open Settings, find this app, and allow Alarms &amp; reminders.</string>
     <string name="row_widget_name">Tijd — Single row</string>
-    <string name="row_widget_description">The time in spoken words on a single row</string>
+    <string name="row_widget_description">Time in words on a single row</string>
     <string name="clock_unavailable">No clock app is available on this device.</string>
     <string name="my_widgets">My widgets</string>
     <string name="my_widgets_empty">Your home screen, in your own words. Add your first widget and make it yours.</string>
@@ -66,4 +66,55 @@
     <string name="language_accessibility">Language: %1$s</string>
     <string name="widget_edit_accessibility">Widget %1$d, %2$s, %3$s. Edit style</string>
     <string name="close_picker">Close layout picker</string>
+    <string name="color_white" translatable="false">White</string>
+    <string name="color_ivory" translatable="false">Ivory</string>
+    <string name="color_cream" translatable="false">Cream</string>
+    <string name="color_sand" translatable="false">Sand</string>
+    <string name="color_stone" translatable="false">Stone</string>
+    <string name="color_silver" translatable="false">Silver</string>
+    <string name="color_slate" translatable="false">Slate</string>
+    <string name="color_charcoal" translatable="false">Charcoal</string>
+    <string name="color_ink" translatable="false">Ink</string>
+    <string name="color_black" translatable="false">Black</string>
+    <string name="color_blush" translatable="false">Blush</string>
+    <string name="color_rose" translatable="false">Rose</string>
+    <string name="color_raspberry" translatable="false">Raspberry</string>
+    <string name="color_burgundy" translatable="false">Burgundy</string>
+    <string name="color_coral" translatable="false">Coral</string>
+    <string name="color_terracotta" translatable="false">Terracotta</string>
+    <string name="color_rust" translatable="false">Rust</string>
+    <string name="color_peach" translatable="false">Peach</string>
+    <string name="color_apricot" translatable="false">Apricot</string>
+    <string name="color_amber" translatable="false">Amber</string>
+    <string name="color_honey" translatable="false">Honey</string>
+    <string name="color_lemon" translatable="false">Lemon</string>
+    <string name="color_sage" translatable="false">Sage</string>
+    <string name="color_olive" translatable="false">Olive</string>
+    <string name="color_moss" translatable="false">Moss</string>
+    <string name="color_forest" translatable="false">Forest</string>
+    <string name="color_mint" translatable="false">Mint</string>
+    <string name="color_seafoam" translatable="false">Seafoam</string>
+    <string name="color_teal" translatable="false">Teal</string>
+    <string name="color_petrol" translatable="false">Petrol</string>
+    <string name="color_ice" translatable="false">Ice</string>
+    <string name="color_sky" translatable="false">Sky</string>
+    <string name="color_denim" translatable="false">Denim</string>
+    <string name="color_cobalt" translatable="false">Cobalt</string>
+    <string name="color_navy" translatable="false">Navy</string>
+    <string name="color_periwinkle" translatable="false">Periwinkle</string>
+    <string name="color_lavender" translatable="false">Lavender</string>
+    <string name="color_lilac" translatable="false">Lilac</string>
+    <string name="color_plum" translatable="false">Plum</string>
+    <string name="color_aubergine" translatable="false">Aubergine</string>
+    <string name="font_sans" translatable="false">System sans</string>
+    <string name="font_rounded" translatable="false">Rounded</string>
+    <string name="font_google" translatable="false">Google Sans</string>
+    <string name="font_serif" translatable="false">Serif</string>
+    <string name="font_mono" translatable="false">Monospace</string>
+    <string name="font_condensed" translatable="false">Condensed</string>
+    <string name="font_serif_mono" translatable="false">Serif mono</string>
+    <string name="font_sans_light" translatable="false">Light sans</string>
+    <string name="font_sans_black" translatable="false">Heavy sans</string>
+    <string name="font_casual" translatable="false">Casual</string>
+    <string name="font_cursive" translatable="false">Cursive</string>
 </resources>

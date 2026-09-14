@@ -1,0 +1,12 @@
+Kello omalla kielelläsi ja tyylilläsi.
+
+Tijd näyttää kellonajan sanoin Androidin aloitusnäytöllä. Valitse 91 kieli-, kirjoitusjärjestelmä- ja aluevaihtoehdosta. Muokkaa jokaista widgetiä erikseen.
+
+• Kompakti tekstikello tai kellonaika yhdellä rivillä.
+• Fontit, 40 väriä ja säädettävä taustan läpinäkyvyys.
+• Reaaliaikainen esikatselu ja tallennetut tyylit.
+• Napautus avaa kellosovelluksesi.
+
+Toimii ilman internetiä. Ei mainoksia, käyttäjätilejä tai tietojen keräämistä.
+
+Lisää widget Tijdistä tai aloitusnäytön widgetvalikosta. Salli hälytykset ja muistutukset, jotta kello päivittyy minuutin välein. Päivitykset voivat keskeytyä puhelimen lepotilassa. Jotkin ulkoasuasetukset vaativat Android 12:n tai uudemman.

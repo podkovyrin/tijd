@@ -32,3 +32,13 @@ CMakeUserPresets.json
 # Mise task namespaces are source, even when named after ignored output folders.
 !/.mise/tasks/build/
 !/.mise/tasks/build/**
+
+# Store publishing dependencies and credentials (keep credentials outside the repo)
+.bundle/
+vendor/bundle/
+android/fastlane/report.xml
+android/fastlane/README.md
+android/fastlane/Preview.html
+play-service-account*.json
+google-play-key*.json
+__pycache__/

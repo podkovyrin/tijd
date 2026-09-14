@@ -1,0 +1,12 @@
+Um relógio no teu idioma e ao teu gosto.
+
+O Tijd mostra as horas por extenso no ecrã inicial do Android. Escolhe entre 91 opções de idioma, escrita e região. Personaliza cada widget separadamente.
+
+• Relógio de texto compacto ou numa só linha.
+• Tipos de letra, 40 cores e transparência do fundo ajustável.
+• Pré-visualização em tempo real e estilos guardados.
+• Toca para abrir a tua aplicação de relógio.
+
+Não precisa de internet. Sem anúncios, contas ou recolha de dados.
+
+Adiciona um widget pelo Tijd ou pelo seletor de widgets do ecrã inicial. Permite alarmes e lembretes para atualizar o relógio a cada minuto. As atualizações podem parar enquanto o telefone está em suspensão. Algumas opções de aspeto exigem Android 12 ou posterior.

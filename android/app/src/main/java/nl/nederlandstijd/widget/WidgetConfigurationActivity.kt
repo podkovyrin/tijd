@@ -110,24 +110,24 @@ class WidgetConfigurationActivity : AppCompatActivity() {
     private fun buildControls() {
         controls.removeAllViews()
         controls.label(getString(R.string.language))
-        val languageButton = controls.action(LanguagePicker.displayName(draft.languageCode)) { }
+        val languageButton = controls.action(LanguagePicker.displayName(this, draft.languageCode)) { }
         languageButton.setIconResource(R.drawable.ic_chevron_right)
         languageButton.iconGravity = com.google.android.material.button.MaterialButton.ICON_GRAVITY_END
-        languageButton.contentDescription = getString(R.string.language_accessibility, LanguagePicker.displayName(draft.languageCode))
+        languageButton.contentDescription = getString(R.string.language_accessibility, LanguagePicker.displayName(this, draft.languageCode))
         languageButton.setOnClickListener {
             LanguagePicker.show(this, draft.languageCode) { code ->
                 change(draft.copy(languageCode = code))
-                languageButton.text = LanguagePicker.displayName(code)
-                languageButton.contentDescription = getString(R.string.language_accessibility, LanguagePicker.displayName(code))
+                languageButton.text = LanguagePicker.displayName(this, code)
+                languageButton.contentDescription = getString(R.string.language_accessibility, LanguagePicker.displayName(this, code))
             }
         }
         controls.label(getString(R.string.appearance), heading = true)
-        val palette = StyleCatalog.colors.map { StyleOption(it.id, it.name, color = it.argb) }
+        val palette = StyleCatalog.colors.map { StyleOption(it.id, getString(it.label), color = it.argb) }
         controls.choice(getString(R.string.text_color), listOf(StyleOption("automatic", getString(R.string.automatic))) + palette, draft.colorId) {
             change(draft.copy(colorId = it))
         }
         controls.choice(getString(R.string.typeface), ClockFont.available().map {
-            StyleOption(it.id, it.name, typeface = it.typeface)
+            StyleOption(it.id, getString(it.label), typeface = it.typeface)
         }, draft.fontId) { change(draft.copy(fontId = it)) }
         controls.choice(getString(R.string.text_size), listOf(
             StyleOption("70", getString(R.string.size_small)), StyleOption("85", getString(R.string.size_medium)),

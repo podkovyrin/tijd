@@ -1,0 +1,61 @@
+default_platform(:android)
+
+# Resolve paths once; fastlane executes lane blocks from the fastlane directory.
+PROJECT_ROOT = File.expand_path("../..", __dir__)
+ANDROID_ROOT = File.join(PROJECT_ROOT, "android")
+METADATA_ROOT = File.join(__dir__, "metadata/android")
+
+def play_options
+  key = ENV["GOOGLE_PLAY_JSON_KEY"]
+  UI.user_error!("Set GOOGLE_PLAY_JSON_KEY to an absolute credentials JSON path outside the repository.") if key.to_s.empty?
+  UI.user_error!("GOOGLE_PLAY_JSON_KEY must point to an existing absolute file.") unless key.start_with?("/") && File.file?(key)
+  {
+    package_name: "nl.nederlandstijd.widget",
+    json_key: key,
+    metadata_path: METADATA_ROOT,
+    track: "internal",
+    skip_upload_apk: true,
+    skip_upload_aab: true,
+    skip_upload_changelogs: true,
+    skip_upload_images: true,
+    skip_upload_screenshots: true,
+    changes_not_sent_for_review: true,
+    rescue_changes_not_sent_for_review: false
+  }
+end
+
+platform :android do
+  desc "Check translations and Play text locally; no credentials or network required"
+  lane :check do
+    sh("python3", File.join(PROJECT_ROOT, "scripts/localization.py"), "--check")
+  end
+
+  desc "Validate metadata with Google Play without committing the edit"
+  lane :validate_metadata do
+    sh("python3", File.join(PROJECT_ROOT, "scripts/localization.py"), "--for-upload")
+    check
+    upload_to_play_store(**play_options.merge(validate_only: true))
+  end
+
+  desc "Upload only listing text; leave changes for review in Play Console"
+  lane :upload_metadata do
+    sh("python3", File.join(PROJECT_ROOT, "scripts/localization.py"), "--for-upload")
+    check
+    upload_to_play_store(**play_options)
+  end
+
+  desc "Upload an existing signed AAB as an internal draft; no production rollout"
+  lane :upload_internal do |options|
+    sh("python3", File.join(PROJECT_ROOT, "scripts/localization.py"), "--for-upload")
+    check
+    aab = options[:aab]
+    UI.user_error!("Pass aab:/absolute/path/to/signed.aab") unless aab && aab.start_with?("/") && File.file?(aab)
+    require "open3"
+    output, status = Open3.capture2e("jarsigner", "-verify", "-J-Duser.language=en", aab)
+    UI.user_error!("AAB signature verification failed; build with the upload signing key first.") unless status.success? && output.include?("jar verified.")
+    upload_to_play_store(**play_options.merge(
+      aab: aab, skip_upload_aab: false, skip_upload_metadata: true,
+      skip_upload_changelogs: false, release_status: "draft"
+    ))
+  end
+end

@@ -1,0 +1,12 @@
+Një orë në gjuhën dhe stilin tënd.
+
+Tijd është një miniaplikacion që shfaq orën me fjalë në ekranin kryesor të Android. Zgjidh mes 91 varianteve të gjuhës, shkrimit dhe shprehjeve rajonale. Përshtat stilin e çdo miniaplikacioni veçmas.
+
+• Paraqitje kompakte ose me një rresht.
+• Shkronja, 40 ngjyra dhe tejdukshmëri e rregullueshme e panelit.
+• Pamje paraprake e menjëhershme dhe stile të ruajtura.
+• Prek për të hapur aplikacionin e orës.
+
+Nuk nevojitet internet. Pa reklama, llogari ose mbledhje të dhënash.
+
+Shto një miniaplikacion nga Tijd ose nga menyja e miniaplikacioneve në ekranin kryesor. Lejo Alarmet dhe rikujtuesit për përditësim çdo minutë. Përditësimet mund të ndalojnë përkohësisht kur telefoni fle. Disa cilësime të pamjes kërkojnë Android 12 ose më të ri.

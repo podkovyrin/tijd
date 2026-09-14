@@ -1,0 +1,12 @@
+Đồng hồ theo ngôn ngữ và phong cách của bạn.
+
+Tijd là tiện ích hiển thị giờ bằng chữ trên màn hình chính Android. Có 91 lựa chọn về ngôn ngữ, hệ chữ và cách diễn đạt theo vùng. Bạn có thể chỉnh giao diện riêng cho từng tiện ích.
+
+• Bố cục gọn hoặc một dòng.
+• Phông chữ, 40 màu và độ trong suốt của nền có thể điều chỉnh.
+• Xem trước trực tiếp và lưu kiểu hiển thị.
+• Chạm để mở ứng dụng đồng hồ.
+
+Không cần internet. Không quảng cáo, tài khoản hay thu thập dữ liệu.
+
+Thêm tiện ích từ Tijd hoặc trình chọn tiện ích trên màn hình chính. Cho phép Báo thức và lời nhắc để cập nhật mỗi phút. Việc cập nhật có thể tạm dừng khi điện thoại ngủ. Một số tùy chọn giao diện cần Android 12 trở lên.

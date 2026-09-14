@@ -1,0 +1,12 @@
+Jam dengan bahasa dan gaya pilihan Anda.
+
+Tijd adalah widget jam yang menampilkan waktu dalam kata-kata di layar utama Android. Tersedia 91 pilihan bahasa, aksara, dan ragam regional. Sesuaikan gaya setiap widget secara terpisah.
+
+• Tampilan ringkas atau satu baris.
+• Pilihan font, 40 warna, dan transparansi panel yang dapat diatur.
+• Pratinjau langsung dan gaya tersimpan.
+• Ketuk widget untuk membuka aplikasi jam.
+
+Tanpa internet, iklan, akun, atau pengumpulan data.
+
+Tambahkan widget dari Tijd atau pemilih widget di layar utama. Izinkan Alarm dan pengingat untuk pembaruan setiap menit. Pembaruan dapat terhenti sementara saat ponsel tidur. Beberapa pengaturan tampilan memerlukan Android 12 atau yang lebih baru.

@@ -1,0 +1,12 @@
+Sizin dilinizdə və üslubunuzda saat.
+
+Tijd Android cihazınızın əsas ekranında vaxtı sözlərlə göstərən saat vidcetidir. Dil, yazı sistemi və regional ifadələr üzrə 91 seçimdən yararlanın. Hər vidcetin üslubunu ayrıca tənzimləyin.
+
+• Yığcam və ya bir sətirlik mətn saatı.
+• Şriftlər, 40 rəng və fon panelinin şəffaflıq ayarı.
+• Canlı önbaxış və üslubların saxlanması.
+• Vidcetə toxunaraq saat tətbiqini açın.
+
+İnternet tələb olunmur. Reklam, hesab və məlumat toplama yoxdur.
+
+Vidceti Tijd-dən və ya əsas ekranın vidcet menyusundan əlavə edin. Hər dəqiqə yenilənmə üçün siqnallara və xatırlatmalara icazə verin. Telefon yuxu rejimində olarkən yenilənmələr dayana bilər. Bəzi görünüş seçimləri üçün Android 12 və ya daha yeni versiya lazımdır.

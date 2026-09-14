@@ -16,6 +16,18 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // Supply an existing upload key through the environment; never commit key material.
+    val uploadStore = providers.environmentVariable("ANDROID_UPLOAD_KEYSTORE").orNull
+    if (uploadStore != null) {
+        signingConfigs.create("upload") {
+            storeFile = file(uploadStore)
+            storePassword = providers.environmentVariable("ANDROID_UPLOAD_STORE_PASSWORD").get()
+            keyAlias = providers.environmentVariable("ANDROID_UPLOAD_KEY_ALIAS").get()
+            keyPassword = providers.environmentVariable("ANDROID_UPLOAD_KEY_PASSWORD").get()
+        }
+        buildTypes.getByName("release").signingConfig = signingConfigs.getByName("upload")
+    }
+
     externalNativeBuild {
         cmake {
             path = file("src/main/cpp/CMakeLists.txt")

@@ -1,0 +1,12 @@
+Erlojua zure hizkuntzan eta zure estiloan.
+
+Tijd Androiden hasierako pantailan ordua hitzez erakusten duen erloju-widgeta da. Aukeratu 91 hizkuntza-, idazkera- eta eskualde-aldaeraren artean. Egokitu widget bakoitzaren estiloa bereizita.
+
+• Diseinu trinkoa edo lerro bakarra.
+• Letra-tipoak, 40 kolore eta panelaren gardentasun doigarria.
+• Zuzeneko aurrebista eta gordetako estiloak.
+• Sakatu erloju-aplikazioa irekitzeko.
+
+Ez du Internetik behar. Iragarkirik, konturik eta datu-bilketarik gabe.
+
+Gehitu widgeta Tijd-etik edo hasierako pantailako widget-hautatzailetik. Baimendu Alarmak eta abisuak minuturo eguneratzeko. Telefonoa lo dagoen bitartean, eguneraketak eten egin daitezke. Itxuraren aukera batzuek Android 12 edo berriagoa behar dute.
