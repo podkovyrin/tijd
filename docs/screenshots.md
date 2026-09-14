@@ -59,3 +59,9 @@ mise run build:screenshots --check
 This checks complete language coverage, image dimensions, matching Play copies,
 and LFS attributes without an emulator. This workflow writes local files only;
 the existing fastlane upload lanes still skip screenshots.
+
+## Feature graphic
+
+`assets/store/feature-graphic.png` is the 1024 × 500 English Play feature graphic.
+Regenerate on macOS with `uv run --with pillow python scripts/store_feature.py`.
+It uses the listing typography and a stylized word-clock illustration.

@@ -12,9 +12,11 @@ backup. Source repository: https://github.com/podkovyrin/tijd.
 Privacy policy: https://podkovyrin.github.io/tijd/privacy-policy.html.
 
 Console declarations saved: no restricted app access, no ads, non-government,
-no financial features, no health features; category Personalization. Data safety
-is drafted as no collection/sharing and awaits privacy URL and target audience.
-Support email, audience, content rating, store graphics/listing and tester access
+no financial features, no health features; category Personalization. The privacy URL is saved in Console. Data safety
+is drafted as no collection/sharing and awaits the target audience. English listing
+text is saved as a draft. A 1024 × 500 feature graphic is ready at
+`assets/store/feature-graphic.png`; graphics still need to be uploaded.
+Support email, audience, content rating, store graphics and tester access
 remain incomplete. Build 7 incorporates the finalized bundled privacy policy;
 version code 6 has already been uploaded and must not be reused.
 
