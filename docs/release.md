@@ -3,7 +3,7 @@
 Reviewed 14 September 2026 against the repository and current Google documentation.
 Developer account verification is complete. The free app is created in Play
 Console as `4973691103378440619` (Tijd: Word Clock Widget), package
-`com.podkovyrin.tijd`. Version 1.0 (6) was published to internal testing on
+`com.podkovyrin.tijd`. Version 1.0 (7) was published to internal testing on
 14 September 2026. No testers are configured yet; production requires 12 closed
 testers opted in continuously for 14 days.
 
@@ -14,11 +14,17 @@ Privacy policy: https://podkovyrin.github.io/tijd/privacy-policy.html.
 Console declarations saved: no restricted app access, no ads, non-government,
 no financial features, no health features; category Personalization. The privacy URL is saved in Console. Data safety
 is saved as no collection/sharing. Target audience is 13–15, 16–17 and 18+. English listing
-text is saved as a draft. A 1024 × 500 feature graphic is ready at
-`assets/store/feature-graphic.png`; graphics still need to be uploaded.
-Support email, content rating, store graphics and tester access
-remain incomplete. Build 7 incorporates the finalized bundled privacy policy;
-version code 6 has already been uploaded and must not be reused.
+text, icon, feature graphic and two phone screenshots were uploaded with Fastlane;
+Console shows Ready to send for review. The 1024 × 500 graphic source is
+`assets/store/feature-graphic.png`. App-scoped publishing credentials are configured
+outside Git (see [localization publishing setup](localization.md)).
+Console setup is 9 of 11 complete. Support email, content rating and tester access
+remain incomplete. Build 7
+incorporates the finalized bundled privacy policy;
+version codes 6 and 7 have already been uploaded and must not be reused.
+
+Build 7 English release notes saved in Console: “Updated the in-app privacy policy
+with the published policy and contact details.”
 
 ## Identity
 
@@ -35,11 +41,11 @@ version code 6 has already been uploaded and must not be reused.
 
 The package ID is the app's technical identity, separate from its visible name.
 Keep the existing ID unless a different identity is deliberately chosen before
-the first Play upload; renaming it later creates a different app. Build number 6
-is valid for a first release; increase it for subsequent uploads and do not reuse
-an uploaded code. See [Google's app setup guidance](https://support.google.com/googleplay/android-developer/answer/9859152).
+the first Play upload; renaming it later creates a different app. Build number 7
+has been uploaded; increase it for subsequent uploads and do not reuse an
+uploaded code. See [Google's app setup guidance](https://support.google.com/googleplay/android-developer/answer/9859152).
 
-## Work to do while account verification is pending
+## Release preparation
 
 - [x] Apply the Tijd display name, update manual widget instructions, and rename the
   Android/project notice heading. The shared C++ library remains `spoken_time`.
@@ -48,7 +54,7 @@ an uploaded code. See [Google's app setup guidance](https://support.google.com/g
   are in `assets/branding`. Android now uses legacy density icons, an adaptive
   foreground/background, and a themed monochrome layer. Check launcher rendering
   and the system splash screen on the final release candidate.
-- [ ] **Prepare store graphics.** Google requires a 512 × 512 PNG icon, a
+- [x] **Prepare store graphics.** Google requires a 512 × 512 PNG icon, a
   1024 × 500 feature graphic, and at least two screenshots. Aim for four real phone
   screenshots covering both widgets, styling, and language selection. Prepare
   device-specific screenshots if expanding the listing to other form factors.
@@ -56,20 +62,12 @@ an uploaded code. See [Google's app setup guidance](https://support.google.com/g
 - [x] **Draft the privacy policy and expose it in the app.** The offline entry reads
   `res/raw/privacy_policy.txt`; the GitHub Pages build renders that same text.
   It covers local data, permissions, retention/deletion, and external services.
-- [ ] **Finalize contact details and publish the privacy page.** Confirm the GitHub
-  repository and privacy contact, then follow the [Pages setup guide](github-pages.md).
-  The manual publication workflow is ready; publication is blocked until the
-  policy's Privacy questions section is completed. Even apps
-  collecting no data need a policy and Data safety form for closed/open testing
-  and production; internal-only testing is exempt from the form. See
-  [Data safety](https://support.google.com/googleplay/android-developer/answer/10787469)
-  and [Google's privacy-policy guidance](https://support.google.com/googleplay/android-developer/thread/307687762/tips-and-best-practices-for-complying-with-privacy-policy-requirements?hl=en).
-- [ ] **Set up release signing.** Create and securely back up an upload key, configure the
-  [signing environment variables](localization.md), and build a signed Android App Bundle. Keep
-  passwords and keys outside tracked files; ignore patterns already exist. Enroll
-  in Play App Signing when uploading. Without signing credentials, `bundleRelease` output is
-  unsigned and cannot be used as the submission artifact. See
-  [Android signing guidance](https://developer.android.com/studio/publish/app-signing).
+- [x] **Publish the privacy page.** GitHub Pages serves the finalized policy with
+  GitHub Issues as the privacy contact. The URL and no-collection/no-sharing Data
+  safety answers are saved in Console. A public store support email is still needed.
+- [x] **Set up release signing.** Upload key and passwords are stored outside Git,
+  backed up by the owner, and used to produce signed bundles. Build 7 is already
+  on the internal testing track.
 - [ ] **Run release-candidate QA.** Use the matrix below, fix findings, and record
   device/OS/build and results. A successful build does not establish clock
   reliability, battery impact, or language accuracy.

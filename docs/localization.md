@@ -40,8 +40,9 @@ are separate from Android's resource locale support.
 Language names use Android's locale data and retain native names in the picker;
 English catalog names remain searchable. All 40 color names and 11 font names
 stay in English and are marked `translatable="false"`; stored style IDs stay stable. Legal source documents (privacy policy and upstream licenses/notices)
-remain in English; their navigation labels are localized. The privacy policy
-still needs the owner's contact details before publication.
+remain in English; their navigation labels are localized. The privacy policy is
+published on GitHub Pages and uses the public repository's Issues page for privacy
+questions.
 
 To edit translations, change the JSON files, then run from the repository root:
 
@@ -117,7 +118,7 @@ account access, support email, public privacy URL, Data safety and other app
 content declarations, a feature graphic and real screenshots. The existing Play
 icon is `assets/branding/play-store-icon.png`. See the [release checklist](release.md).
 The text upload package is not a claim that these separate account and visual
-asset requirements have been completed. No store changes have been submitted.
+asset requirements have been completed. See the release checklist for live Console status.
 
 ## Verification recorded for this change
 
@@ -133,8 +134,10 @@ asset requirements have been completed. No store changes have been submitted.
   button labels at 200% text. Buttons now grow vertically for translated text.
 - Workflow syntax and Ruby lane syntax pass. The full device-regression suite,
   older-device visual QA and native-speaker review have not been run.
-- Live Play validation/upload has not run because Console credentials and
-  initial app setup have not been supplied. No signed upload artifact was created.
+- On 14 September 2026, the reviewed English listing passed live Play validation
+  and its text, icon, feature graphic and two screenshots were committed through
+  Fastlane supply. Console shows Ready to send for review. Signed build 7 was
+  uploaded as a draft through supply, then published to internal testing in Console.
 
 ## Full listing upload (text and graphics)
 
@@ -150,11 +153,26 @@ English icon/feature graphic. They leave the edit for review in Play Console and
 do not upload a binary. The existing `upload_metadata` lane still sends text only.
 Fastlane manages the screenshot sets in the supplied locale directories.
 
-Current blockers discovered on 14 September 2026:
-- `GOOGLE_PLAY_JSON_KEY` is not configured. Create a Google Cloud service account,
-  enable the Android Publisher API, and grant that account access to this app in
-  Play Console (store presence permissions; testing permissions only if it will
-  also upload test builds). Keep the credential outside this repository.
+Local publishing setup completed on 14 September 2026:
+
+- Cloud project `podkovyrin-tijd` has the Android Publisher API enabled. Service
+  account `play-publisher@podkovyrin-tijd.iam.gserviceaccount.com` has app-specific
+  read, quality, draft-app, testing-release, store-presence and policy-declaration
+  permissions. It has no production-release or account-wide permissions.
+- The JSON key is stored outside the repository at `~/.config/tijd/play/publisher.json`.
+  Ignored `android/.env.default` sets `GOOGLE_PLAY_JSON_KEY` to its absolute path.
+  Both files have owner-only permissions. Fastlane authentication and upload work.
+- Google rejected `changes_not_sent_for_review: true` for this app state. The
+  English-only direct supply upload omitted that flag and succeeded; Console
+  showed Ready to send for review. The all-locale lanes retain their conservative
+  review behavior and require a deliberate adjustment if Google rejects it.
+
+Remaining translation blocker:
+
 - `localization/review.json` is absent, so `--for-upload` fails. Structural checks
   pass for 91 app locales and 67 store listings, but the upload review gate must
   be resolved with actual editorial review evidence, not fabricated statuses.
+
+The English-only upload used an ignored staging directory, `build/play-english`,
+containing the reviewed `en-US` metadata. It did not upload the other 66 listings
+or manufacture translation review records.
