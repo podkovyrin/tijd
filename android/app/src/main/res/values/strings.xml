@@ -1,8 +1,9 @@
 <resources>
     <string name="language">Language</string>
+    <string name="privacy_policy">Privacy policy</string>
     <string name="license_acknowledgments">License and acknowledgments</string>
     <string name="full_license">Full license</string>
-    <string name="app_name">nederlandse tijd</string>
+    <string name="app_name" translatable="false">Tijd</string>
     <string name="widget_description">The time in spoken words</string>
     <string name="preview_time">vijf voor half negen</string>
     <string name="setup_description">A little less digital. A little more human.</string>
@@ -11,9 +12,9 @@
     <string name="permission_missing">Keep your clock on time</string>
     <string name="allow_updates">Allow minute updates</string>
     <string name="add_widget">Add widget</string>
-    <string name="add_widget_manually">To add the widget, touch and hold your home screen and choose Widgets, then nederlandse tijd.</string>
+    <string name="add_widget_manually">To add the widget, touch and hold your home screen and choose Widgets, then Tijd.</string>
     <string name="permission_settings_unavailable">Open Settings, find this app, and allow Alarms &amp; reminders.</string>
-    <string name="row_widget_name">nederlandse tijd — één regel</string>
+    <string name="row_widget_name">Tijd — Single row</string>
     <string name="row_widget_description">The time in spoken words on a single row</string>
     <string name="clock_unavailable">No clock app is available on this device.</string>
     <string name="my_widgets">My widgets</string>

@@ -1,6 +1,6 @@
-# Spoken Time
+# Tijd: Time in Words
 
-A cross-platform project for showing the time in spoken words. The Android widget uses
+Tijd is an Android widget for showing the time in spoken words. It uses
 the shared C++20 library through JNI, with 91 language, script, and regional choices.
 
 - Each widget saves its own language, initially selected from the current device locale. Unsupported locales fall back to English. Saved defaults can override the initial selection for future widgets.
@@ -26,6 +26,14 @@ Edit a widget from **My widgets**, or use your launcher’s widget settings wher
 - `ClockUpdates` serializes publications and includes the style in its layout identity, so editing triggers a complete update and later minute ticks preserve the style.
 
 ## Development
+
+The Google Play title is **Tijd: Time in Words**; the installed app name is **Tijd**.
+See the [first-release checklist](docs/release.md), [store listing draft](docs/store-listing.md),
+and [icon generation prompt](docs/icon-prompt.md).
+
+The privacy policy is bundled in the app and prepared for GitHub Pages. Follow
+the [GitHub Pages setup guide](docs/github-pages.md) when ready to publish; the
+workflow is manual and nothing is deployed just by pushing.
 
 [Mise](https://mise.jdx.dev/) pins the JDK, CMake, Ninja, and C++ formatting tools used by the
 repository. After installing Mise, run:

@@ -53,12 +53,15 @@ class MainActivity : AppCompatActivity() {
         }
         permissionDescription = permissionCard.label(getString(R.string.permission_description))
         permissionButton = permissionCard.action(getString(R.string.allow_updates)) { requestMinutePermission() }
+        content.action(getString(R.string.privacy_policy)) {
+            showDocumentText(R.string.privacy_policy, R.raw.privacy_policy)
+        }.setIconResource(R.drawable.ic_info)
         content.action(getString(R.string.license_acknowledgments)) {
-            showLicenseText(R.string.license_acknowledgments, R.raw.project_notice, true)
+            showDocumentText(R.string.license_acknowledgments, R.raw.project_notice, true)
         }.setIconResource(R.drawable.ic_info)
     }
 
-    private fun showLicenseText(title: Int, resource: Int, showFullLicense: Boolean = false) {
+    private fun showDocumentText(title: Int, resource: Int, showFullLicense: Boolean = false) {
         val text = TextView(this).apply {
             text = resources.openRawResource(resource).bufferedReader().use { it.readText() } +
                 if (resource == R.raw.project_notice) "\n\n" + resources.openRawResource(R.raw.material_icons_license)
@@ -69,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                     } else ""
             setPadding(dp(20), dp(16), dp(20), dp(16))
             setTextIsSelectable(true)
-            Linkify.addLinks(this, Linkify.WEB_URLS)
+            Linkify.addLinks(this, Linkify.WEB_URLS or Linkify.EMAIL_ADDRESSES)
             movementMethod = LinkMovementMethod.getInstance()
         }
         val scroll = ScrollView(this).apply { addView(text) }
@@ -80,7 +83,7 @@ class MainActivity : AppCompatActivity() {
             .apply {
                 if (showFullLicense) {
                     setNeutralButton(R.string.full_license) { _, _ ->
-                        showLicenseText(R.string.full_license, R.raw.project_license)
+                        showDocumentText(R.string.full_license, R.raw.project_license)
                     }
                 }
             }

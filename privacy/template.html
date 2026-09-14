@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How Tijd: Time in Words handles information on your device, permissions, and privacy questions.">
+  <meta name="color-scheme" content="light dark">
+  <title>{{TITLE}}</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <style>
+    :root { color-scheme: light dark; --paper: #fff9ec; --ink: #173d30; --muted: #536159; --line: #d5dccf; --link: #176c46; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 1.0625rem/1.75 system-ui, sans-serif; }
+    main { max-width: 47rem; margin: auto; padding: 3.5rem 1.5rem 4rem; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 2rem; margin-bottom: 2rem; }
+    .brand { display: flex; align-items: center; gap: .8rem; font-size: 1rem; font-weight: 650; }
+    .brand img { width: 3rem; height: 3rem; border-radius: .75rem; }
+    h1 { font-size: clamp(2rem, 7vw, 3rem); line-height: 1.15; letter-spacing: -.035em; margin: 1.8rem 0 .75rem; }
+    h2 { font-size: 1.2rem; line-height: 1.4; margin: 2rem 0 .6rem; }
+    p { margin: 0; overflow-wrap: anywhere; }
+    .date, footer { color: var(--muted); font-size: .9375rem; }
+    a { color: var(--link); text-underline-offset: .18em; }
+    a:focus-visible { outline: 3px solid var(--link); outline-offset: 4px; border-radius: 2px; }
+    footer { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+    @media (prefers-color-scheme: dark) {
+      :root { --paper: #13251d; --ink: #eff5ed; --muted: #b5c3b7; --line: #425248; --link: #bcefd0; }
+    }
+    @media (max-width: 480px) { main { padding: 2rem 1.25rem 3rem; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="brand"><img src="icon.png" width="48" height="48" alt="">Tijd: Time in Words</div>
+      <h1>Privacy policy</h1>
+      <p class="date">{{DATE}}</p>
+    </header>
+    {{SECTIONS}}
+    <footer><a href="privacy-policy.txt">Read as plain text</a></footer>
+  </main>
+</body>
+</html>

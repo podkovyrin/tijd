@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Keep the speech-bubble tail inside the adaptive icon's circular safe zone. -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:inset="12%">
+    <bitmap android:src="@drawable/tijd_icon_foreground" android:gravity="fill" />
+</inset>
