@@ -18,9 +18,11 @@ text, icon, feature graphic and two phone screenshots were uploaded with Fastlan
 Console shows Ready to send for review. The 1024 × 500 graphic source is
 `assets/store/feature-graphic.png`. App-scoped publishing credentials are configured
 outside Git (see [localization publishing setup](localization.md)).
-Console setup is 9 of 11 complete. Support email, content rating and tester access
-remain incomplete. Build 7
-incorporates the finalized bundled privacy policy;
+Public support email `tijd.app@gmail.com` and website
+https://github.com/podkovyrin/tijd are saved in Console.
+Console setup is 10 of 11 complete. Content rating and tester access remain
+incomplete; accepting the IARC terms still requires the owner’s confirmation.
+Build 7 incorporates the finalized bundled privacy policy;
 version codes 6 and 7 have already been uploaded and must not be reused.
 
 Build 7 English release notes saved in Console: “Updated the in-app privacy policy
@@ -64,7 +66,7 @@ uploaded code. See [Google's app setup guidance](https://support.google.com/goog
   It covers local data, permissions, retention/deletion, and external services.
 - [x] **Publish the privacy page.** GitHub Pages serves the finalized policy with
   GitHub Issues as the privacy contact. The URL and no-collection/no-sharing Data
-  safety answers are saved in Console. A public store support email is still needed.
+  safety answers are saved in Console. Public support email: `tijd.app@gmail.com`.
 - [x] **Set up release signing.** Upload key and passwords are stored outside Git,
   backed up by the owner, and used to produce signed bundles. Build 7 is already
   on the internal testing track.

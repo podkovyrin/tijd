@@ -34,13 +34,12 @@ Time in words on your home screen. Choose your language and style.
 
 ## Listing fields to complete
 
-- Suggested category: Personalization. Confirm in the Console.
-- Support email: choose a monitored public address.
+- Category: Personalization (saved in Console).
+- Support email: tijd.app@gmail.com (saved in Console).
 - Privacy policy: use the GitHub Pages URL ending in `/privacy-policy.html` after
   publication; see [setup instructions](github-pages.md).
-- Website: use the GitHub repository URL if filling this optional field. No
-  separate marketing website is planned.
-- Price, launch countries, and target age groups: owner decisions, not yet set.
+- Website: https://github.com/podkovyrin/tijd (saved in Console).
+- Price: Free. Target audience: 13–15, 16–17 and 18+. Launch countries remain to be set.
 
 ## Screenshot brief
 
