@@ -44,6 +44,24 @@ platform :android do
     upload_to_play_store(**play_options)
   end
 
+  desc "Validate all listing text, graphics and screenshots without committing the Play edit"
+  lane :validate_listing do
+    sh("python3", File.join(PROJECT_ROOT, "scripts/localization.py"), "--for-upload")
+    upload_to_play_store(**play_options.merge(
+      skip_upload_images: false, skip_upload_screenshots: false,
+      sync_image_upload: true, validate_only: true
+    ))
+  end
+
+  desc "Upload all listing text, graphics and screenshots; leave changes for Console review"
+  lane :upload_listing do
+    sh("python3", File.join(PROJECT_ROOT, "scripts/localization.py"), "--for-upload")
+    upload_to_play_store(**play_options.merge(
+      skip_upload_images: false, skip_upload_screenshots: false,
+      sync_image_upload: true
+    ))
+  end
+
   desc "Upload an existing signed AAB as an internal draft; no production rollout"
   lane :upload_internal do |options|
     sh("python3", File.join(PROJECT_ROOT, "scripts/localization.py"), "--for-upload")

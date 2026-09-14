@@ -135,3 +135,26 @@ asset requirements have been completed. No store changes have been submitted.
   older-device visual QA and native-speaker review have not been run.
 - Live Play validation/upload has not run because Console credentials and
   initial app setup have not been supplied. No signed upload artifact was created.
+
+## Full listing upload (text and graphics)
+
+Run from `android/` after configuring `GOOGLE_PLAY_JSON_KEY`:
+
+```sh
+bundle exec fastlane android validate_listing
+bundle exec fastlane android upload_listing
+```
+
+These lanes include all 67 listings, localized phone screenshots, and the default
+English icon/feature graphic. They leave the edit for review in Play Console and
+do not upload a binary. The existing `upload_metadata` lane still sends text only.
+Fastlane manages the screenshot sets in the supplied locale directories.
+
+Current blockers discovered on 14 September 2026:
+- `GOOGLE_PLAY_JSON_KEY` is not configured. Create a Google Cloud service account,
+  enable the Android Publisher API, and grant that account access to this app in
+  Play Console (store presence permissions; testing permissions only if it will
+  also upload test builds). Keep the credential outside this repository.
+- `localization/review.json` is absent, so `--for-upload` fails. Structural checks
+  pass for 91 app locales and 67 store listings, but the upload review gate must
+  be resolved with actual editorial review evidence, not fabricated statuses.
