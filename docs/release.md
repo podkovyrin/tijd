@@ -1,13 +1,22 @@
 # Tijd first-release checklist
 
 Reviewed 14 September 2026 against the repository and current Google documentation.
-Developer account verification is complete, as reported by the owner. The owner
-created the free app in Play Console; its dashboard was inspected on 14 September
-2026. No release has been uploaded or published. Internal testing shows 0 of 3
-tasks complete; production requires 12 closed testers opted in continuously for
-14 days. Upload signing environment variables are not yet configured.
+Developer account verification is complete. The free app is created in Play
+Console as `4973691103378440619` (Tijd: Word Clock Widget), package
+`com.podkovyrin.tijd`. Version 1.0 (6) was published to internal testing on
+14 September 2026. No testers are configured yet; production requires 12 closed
+testers opted in continuously for 14 days.
 
-Play Console app: `4973691103378440619` — Tijd: Word Clock Widget.
+Upload signing was generated outside the repository and the owner confirmed a
+backup. Source repository: https://github.com/podkovyrin/tijd.
+Privacy policy: https://podkovyrin.github.io/tijd/privacy-policy.html.
+
+Console declarations saved: no restricted app access, no ads, non-government,
+no financial features, no health features; category Personalization. Data safety
+is drafted as no collection/sharing and awaits privacy URL and target audience.
+Support email, audience, content rating, store graphics/listing and tester access
+remain incomplete. Build 7 incorporates the finalized bundled privacy policy;
+version code 6 has already been uploaded and must not be reused.
 
 ## Identity
 
@@ -18,7 +27,7 @@ Play Console app: `4973691103378440619` — Tijd: Word Clock Widget.
 | Single-row widget label | Tijd — Single row |
 | Application ID | `com.podkovyrin.tijd` |
 | First release version | `1.0` |
-| Current build number | `6` |
+| Current build number | `7` |
 | Minimum Android | Android 6.0 / API 23 |
 | Compile / target SDK | 37 / 37 |
 

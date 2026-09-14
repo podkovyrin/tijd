@@ -12,9 +12,10 @@ The app also includes the complete text under **Privacy policy**, readable offli
   local assets, no JavaScript, no analytics, and no external fonts.
 - `.github/workflows/privacy-pages.yml` builds and publishes **only when run
   manually from `main`**. A push does not publish the page.
-- No Git remote is configured yet. Nothing has been pushed or deployed.
-- The GitHub owner/repository and public privacy contact still need confirmation.
-  CI publication fails until the policy has a **Privacy questions** section.
+- Public repository: https://github.com/podkovyrin/tijd.
+- Pages uses GitHub Actions at https://podkovyrin.github.io/tijd/privacy-policy.html.
+- Privacy questions use https://github.com/podkovyrin/tijd/issues; users are told
+  not to post sensitive information in public issues.
 
 ## Before publication
 
