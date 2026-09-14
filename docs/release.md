@@ -149,3 +149,9 @@ mise exec -- ./android/gradlew -p android connectedDebugAndroidTest
 This runs the existing debug instrumentation suite. Separately smoke-test the
 signed release delivered by Play, since a debug test pass does not validate that
 distribution artifact.
+
+## Localized screenshots
+
+See [the screenshot workflow](screenshots.md) to generate and verify the main and
+edit-widget screens for every language with `mise run build:screenshots`. All
+captured PNGs use Git LFS, with copies in the matching fastlane listing folders.

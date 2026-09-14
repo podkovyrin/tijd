@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#MISE description="Capture main and edit-widget screenshots for every Android app language"
+set -euo pipefail
+
+ROOT_DIR="$(git rev-parse --show-toplevel)"
+python3 "$ROOT_DIR/scripts/android_screenshots.py" "$@"

@@ -16,3 +16,7 @@ gradlew text eol=lf
 gradlew.bat text eol=crlf
 *.jar binary
 *.png binary
+
+# Release screenshots are binary assets stored in Git LFS.
+android/screenshots/**/*.png filter=lfs diff=lfs merge=lfs -text
+android/fastlane/metadata/android/**/images/phoneScreenshots/*.png filter=lfs diff=lfs merge=lfs -text
