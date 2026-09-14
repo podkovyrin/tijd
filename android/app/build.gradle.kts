@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace = "nl.nederlandstijd.widget"
+    namespace = "com.podkovyrin.tijd"
     compileSdk = 37
     ndkVersion = "28.1.13356709"
 
     defaultConfig {
-        applicationId = "nl.nederlandstijd.widget"
+        applicationId = "com.podkovyrin.tijd"
         minSdk = 23
         targetSdk = 37
         versionCode = 6

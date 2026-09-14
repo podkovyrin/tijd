@@ -11,6 +11,6 @@
     android:targetCellHeight="1"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="0"
-    android:configure="nl.nederlandstijd.widget.WidgetConfigurationActivity"
+    android:configure="com.podkovyrin.tijd.WidgetConfigurationActivity"
     android:widgetFeatures="reconfigurable|configuration_optional"
     android:widgetCategory="home_screen|keyguard" />

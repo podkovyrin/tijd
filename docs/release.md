@@ -1,8 +1,13 @@
 # Tijd first-release checklist
 
 Reviewed 14 September 2026 against the repository and current Google documentation.
-Developer account verification is pending, as reported by the owner. Play Console
-state has not been inspected and nothing has been submitted or published.
+Developer account verification is complete, as reported by the owner. The owner
+created the free app in Play Console; its dashboard was inspected on 14 September
+2026. No release has been uploaded or published. Internal testing shows 0 of 3
+tasks complete; production requires 12 closed testers opted in continuously for
+14 days. Upload signing environment variables are not yet configured.
+
+Play Console app: `4973691103378440619` — Tijd: Word Clock Widget.
 
 ## Identity
 
@@ -11,7 +16,7 @@ state has not been inspected and nothing has been submitted or published.
 | Google Play title | Tijd: Word Clock Widget |
 | Installed app name | Tijd |
 | Single-row widget label | Tijd — Single row |
-| Application ID | `nl.nederlandstijd.widget` |
+| Application ID | `com.podkovyrin.tijd` |
 | First release version | `1.0` |
 | Current build number | `6` |
 | Minimum Android | Android 6.0 / API 23 |

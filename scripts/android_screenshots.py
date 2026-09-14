@@ -15,7 +15,7 @@ import zlib
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'android/screenshots'
 META = ROOT / 'android/fastlane/metadata/android'
-PACKAGE = 'nl.nederlandstijd.widget'
+PACKAGE = 'com.podkovyrin.tijd'
 SCREENS = ('01-main.png', '02-edit-widget.png')
 
 

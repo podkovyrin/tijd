@@ -10,7 +10,7 @@ def play_options
   UI.user_error!("Set GOOGLE_PLAY_JSON_KEY to an absolute credentials JSON path outside the repository.") if key.to_s.empty?
   UI.user_error!("GOOGLE_PLAY_JSON_KEY must point to an existing absolute file.") unless key.start_with?("/") && File.file?(key)
   {
-    package_name: "nl.nederlandstijd.widget",
+    package_name: "com.podkovyrin.tijd",
     json_key: key,
     metadata_path: METADATA_ROOT,
     track: "internal",

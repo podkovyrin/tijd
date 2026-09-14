@@ -8,7 +8,7 @@
 #include <string>
 
 extern "C" JNIEXPORT jobjectArray JNICALL
-Java_nl_nederlandstijd_widget_SpokenTime_nativeLanguages(JNIEnv* env, jobject) {
+Java_com_podkovyrin_tijd_SpokenTime_nativeLanguages(JNIEnv* env, jobject) {
   const auto languages = spoken_time::supported_languages();
   const auto string_class = env->FindClass("java/lang/String");
   if (string_class == nullptr)
@@ -33,7 +33,7 @@ Java_nl_nederlandstijd_widget_SpokenTime_nativeLanguages(JNIEnv* env, jobject) {
   return result;
 }
 
-extern "C" JNIEXPORT jbyteArray JNICALL Java_nl_nederlandstijd_widget_SpokenTime_nativeFormat(
+extern "C" JNIEXPORT jbyteArray JNICALL Java_com_podkovyrin_tijd_SpokenTime_nativeFormat(
     JNIEnv* env, jobject, jint index, jint hour, jint minute) {
   const auto languages = spoken_time::supported_languages();
   if (index < 0 || static_cast<std::size_t>(index) >= languages.size() || hour < 0 || hour > 23 ||
